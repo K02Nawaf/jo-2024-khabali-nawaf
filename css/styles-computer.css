@@ -3,16 +3,16 @@
 /* -------------------------------------- */
 header {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: right;
-  width: 90%;
+  width: 100%;
   margin: 10px auto;
 }
 
 /* Effet sur les liens au survol */
 .link-category:hover,
 .link-home:hover {
-  color: #1b1b1b; /* Changement de couleur au survol */
+  color: #891111; /* Changement de couleur au survol */
   background-color: #d7c378; /* Changement de fond au survol */
 }
 
