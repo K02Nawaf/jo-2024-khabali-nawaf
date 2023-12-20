@@ -17,7 +17,7 @@
         <nav>
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
-                <li><a href="index.php">Accueil</a></li>
+                <li><a class="current" href="index.php">Accueil</a></li>
                 <li><a href="./pages/sports.php">Sports</a></li>
                 <li><a href="./pages/events.php">Calendrier des épreuves</a></li>
                 <li><a href="./pages/results.php">Résultats</a></li>
@@ -26,16 +26,17 @@
         </nav>
     </header>
     <main>
-        <p class="category-site">
+        <!-- <p class="category-site">
             <a class="link-category" href="./pages/sports.php">Sports</a>
             <a class="link-category" href="events.php">Calendrier des épreuves</a>
             <a class="link-category" href="results.php">Résultats</a>
-        </p>
-    </main>
-    <footer>
+        </p> -->
         <figure>
             <img src="./img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
         </figure>
+    </main>
+    <footer>
+
     </footer>
 </body>
 

@@ -17,7 +17,7 @@
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
                 <li><a href="../index.php">Accueil</a></li>
-                <li><a href="sports.php">Sports</a></li>
+                <li><a class="current" href="sports.php">Sports</a></li>
                 <li><a href="events.php">Calendrier des évènements</a></li>
                 <li><a href="results.php">Résultats</a></li>
                 <li><a href="login.php">Accès administrateur</a></li>

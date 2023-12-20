@@ -33,7 +33,7 @@ ini_set("display_errors", 1);
         <nav>
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
-                <li><a href="../admin.php">Accueil Administration</a></li>
+                <li><a class="current" href="../admin.php">Accueil Administration</a></li>
                 <li><a href="./admin-sports/manage-sports.php">Gestion Sports</a></li>
                 <li><a href="./admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="./admin-events/manage-events.php">Gestion Calendrier</a></li>

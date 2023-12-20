@@ -9,11 +9,18 @@ header {
   margin: 10px auto;
 }
 
+body {
+  background: linear-gradient(to bottom, #171717, #060606);
+  font-family: Nunito;
+}
+
 /* Effet sur les liens au survol */
 .link-category:hover,
 .link-home:hover {
-  color: #891111; /* Changement de couleur au survol */
-  background-color: #d7c378; /* Changement de fond au survol */
+  color: #1b1b1b;
+  /* Changement de couleur au survol */
+  background-color: #d7c378;
+  /* Changement de fond au survol */
 }
 
 .link-home {
@@ -27,7 +34,8 @@ header {
   font-size: 18px;
   color: #d7c378;
   padding: 15px;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Transition pour un effet de survol en douceur */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  /* Transition pour un effet de survol en douceur */
 }
 
 /* Styles pour les tableaux */
@@ -67,7 +75,8 @@ main {
 
 form {
   width: 80%;
-  max-width: 400px; /* Largeur maximale du formulaire */
+  max-width: 400px;
+  /* Largeur maximale du formulaire */
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #1b1b1b;
@@ -94,7 +103,8 @@ input[type="submit"] {
   background-color: #1b1b1b;
   color: #d7c378;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour un effet de survol en douceur */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Transition pour un effet de survol en douceur */
 }
 
 input[type="submit"]:hover {
@@ -106,12 +116,15 @@ input[type="submit"]:hover {
 /* --------------------- */
 figure {
   display: flex;
-  height: auto;
+  height: max-content;
+  align-content: center;
+  text-align: center;
 }
 
 img {
+  margin: 0px auto;
   width: 100%;
-  height: auto;
+  max-width: 460px;
 }
 
 /* ------------------------------ */
@@ -120,35 +133,57 @@ img {
 @media screen and (min-width: 1025px) {
   main {
     width: 90%;
-    margin: 50px auto; /* Centrer le conteneur sur la page */
+    margin: 50px auto;
+    /* Centrer le conteneur sur la page */
   }
 
   nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    font-size: 18px;
+    font-size: 24px;
   }
 
   nav li {
-    width: auto; /* Largeur fixe pour chaque élément du menu */
-    margin-right: 20px;
+    width: auto;
+    /* Largeur fixe pour chaque élément du menu */
+    margin: 0px 20px;
+    font-family: Lobster;
+    box-shadow: 0px 0px 10px #060606 ;
+    border-radius:6px ;
   }
 
   nav a {
     display: block;
     text-decoration: none;
     color: #d7c378;
-    background-color: #1b1b1b; /* Fond du menu */
+    background-color: #1b1b1b;
+    /* Fond du menu */
     padding: 15px;
     text-align: center;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Transition pour un effet de survol en douceur */
-    border-radius: 25px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    /* Transition pour un effet de survol en douceur */
+    border-radius: 6px;
   }
 
   nav a:hover {
-    color: #1b1b1b; /* Changement de couleur au survol */
-    background-color: #d7c378; /* Changement de fond au survol */
+    color: #1b1b1b;
+    /* Changement de couleur au survol */
+    background-color: #d7c378;
+    /* Changement de fond au survol */
+  }
+
+  /* class current used to highlight current page li */
+  .current {
+    color: #d7c378;
+    background-color: #1b1b1b;
+    border: 2px solid #d7c278a4;
+    cursor: default;
+  }
+
+  .current:hover {
+    color: #d7c278b9;
+    background-color: #1b1b1b;
   }
 
   /* Affichage des données de l'utilisateur */
@@ -162,9 +197,11 @@ img {
   /* ------------------------------------------------------------- */
   .category-site {
     display: flex;
-    justify-content: space-around; /* Répartir les éléments de manière égale sur l'axe principal */
+    justify-content: space-around;
+    /* Répartir les éléments de manière égale sur l'axe principal */
     width: 90%;
-    margin: auto; /* Centrer le conteneur sur la page */
+    margin: auto;
+    /* Centrer le conteneur sur la page */
     flex-wrap: wrap;
   }
 
@@ -172,7 +209,7 @@ img {
   /* ------------------------------------------------------------- */
   .link-category {
     display: flex;
-    width: 40%; 
+    width: 40%;
     height: 150px;
     justify-content: center;
     align-items: center;
@@ -182,21 +219,45 @@ img {
     background-color: #1b1b1b;
     font-size: 3vw;
     color: #d7c378;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Transition pour un effet de survol en douceur */
+    transition: color 0.3s ease, background-color 0.3s ease;
+    /* Transition pour un effet de survol en douceur */
   }
 
   /* Effet sur les liens au survol */
   .link-category:hover {
-    color: #1b1b1b; /* Changement de couleur au survol */
-    background-color: #d7c378; /* Changement de fond au survol */
+    color: #1b1b1b;
+    /* Changement de couleur au survol */
+    background-color: #d7c378;
+    /* Changement de fond au survol */
   }
 
   /* Propriétés du footer */
   footer {
-    display: flex;
+    /* display: flex;
     margin: 50px auto;
     width: 90%;
     height: 40vh;
-    justify-content: center; /* Répartir les éléments de manière égale sur l'axe principal */
+    justify-content: center; */
+    /* Répartir les éléments de manière égale sur l'axe principal */
   }
+}
+
+@font-face {
+  font-family: Syne;
+  src: url(./fonts/Syne-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(./fonts/Nunito-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Lobster;
+  src: url(./fonts/Lobster-Regular.ttf);
+}
+
+@font-face {
+  font-family: LobsterTwo;
+  src: url(./fonts/LobsterTwo-Regular.ttf);
 }

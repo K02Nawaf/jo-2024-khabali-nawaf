@@ -23,7 +23,7 @@
                 <li><a href="sports.php">Sports</a></li>
                 <li><a href="events.php">Calendrier des évènements</a></li>
                 <li><a href="results.php">Résultats</a></li>
-                <li><a href="login.php">Accès administrateur</a></li>
+                <li><a class="current" href="">Accès administrateur</a></li>
             </ul>
         </nav>
     </header>
