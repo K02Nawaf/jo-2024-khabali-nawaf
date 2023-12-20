@@ -12,6 +12,7 @@ header {
 body {
   background: linear-gradient(to bottom, #171717, #060606);
   font-family: Nunito;
+  min-height: 98.6vh;
 }
 
 /* Effet sur les liens au survol */
@@ -151,6 +152,7 @@ img {
     font-family: Lobster;
     box-shadow: 0px 0px 10px #060606 ;
     border-radius:6px ;
+    transition: all 0.2s ease;
   }
 
   nav a {
@@ -179,11 +181,16 @@ img {
     background-color: #1b1b1b;
     border: 2px solid #d7c278a4;
     cursor: default;
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45) ;
   }
 
   .current:hover {
     color: #d7c278b9;
     background-color: #1b1b1b;
+  }
+
+  li:active{
+    scale: 90%;
   }
 
   /* Affichage des données de l'utilisateur */
