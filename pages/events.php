@@ -81,6 +81,7 @@
         ini_set("display_errors", 1);
         ?>
         </div>
+        
     </main>
     <footer>
         <a href="">Plan de Site</a>
