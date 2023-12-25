@@ -25,7 +25,12 @@
         </nav>
     </header>
     <main>
-        <h1>Liste des Resultats</h1>
+    <figure>
+            <img class="small" src="../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
+            <h1>Liste des Resultats</h1>
+        </figure>
+        <div class="table-container">
+        
         <?php
         require_once("../database/database.php");
 
@@ -48,9 +53,9 @@
                 <th class='color'>Nom Athlète</th>
                 <th class='color'>Prénom Ahlète</th>
                 <th class='color'>Pays</th>
-                <th class='color'>sport</th>
-                <th class='color'>epreuve</th>
-                <th class='color'>resultat</th>
+                <th class='color'>Sport</th>
+                <th class='color'>Epreuve</th>
+                <th class='color'>Resultat</th>
                 </tr>";
 
                 // Afficher les données dans un tableau
@@ -78,12 +83,7 @@
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
         ?>
-        <p class="paragraph-link">
-            <a class="link-home" href="../index.php">Retour Accueil</a>
-        </p>
-        <figure>
-            <img src="../img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
-        </figure>
+        </div>
 
     </main>
     <footer>

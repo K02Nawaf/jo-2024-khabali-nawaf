@@ -14,7 +14,8 @@ header {
 }
 
 body {
-  background: linear-gradient(to bottom, #171717, #060606);
+  background: linear-gradient(to top, #262626, #161616);
+  /* background: linear-gradient(to bottom, #171717, #060606); */
   font-family: Nunito;
   min-height: 100vh;
   color: #ccc;
@@ -22,11 +23,31 @@ body {
   box-sizing: border-box;
   margin: 0;
   /* padding-top: 10px; */
-  height: 100%;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
 }
 
+h1 {
+  /* color: #f6f0dd; */
+  font-family: Lobster;
+  font-size: 45px;
+  margin: 0px;
+  margin-bottom: 10px;
+  background: linear-gradient(to top, #f6f0dd, #d6c278 90%);
+  color: transparent;
+  background-clip: text;
+  line-height: 70px;
+}
+
+/* img sizing class */
+.small {
+  width: 30%;
+}
+/* table size modifier */
+.smallTable{
+width: 60%;
+}
 /* Effet sur les liens au survol */
 .link-category:hover,
 .link-home:hover {
@@ -53,19 +74,48 @@ body {
 
 /* Styles pour les tableaux */
 /* ------------------------ */
+.table-container {
+  /* display: grid; */
+  /* max-height: 200px; */
+  overflow-y: auto;
+  width: 80%;
+  height: 30vh;
+  flex-grow: 1;
+  flex-direction: column;
+  margin-bottom: 30px;
+  justify-content: center;
+  scrollbar-width: thin;
+  scrollbar-color: #ffe791 #000000;
+  box-shadow: 0 0 7px #111111;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  text-align: center;
+
 }
 
 /* Style pour les en-têtes de colonnes */
 th {
-  background-color: #1b1b1b;
-  color: #d7c378;
+  /* background:linear-gradient(to top,  #f5e9c0,  #d7c378); */
+  /* color: #1b1b1b; */
   padding: 10px;
   text-align: left;
+  font-family: LobsterTwo;
+  font-size: 22px;
+  font-weight: 700;
+  text-shadow: none;
+  /* box-shadow: 0 10px 15px -10px rgb(0, 0, 0); */
+  position:sticky;
+  /* height: 50px; */
+  top: 0;
+  color: #ffe791;
+  box-shadow: 0 10px 15px 0.1px rgba(0, 0, 0, 0.42);
+  background-color: #181818;
+  text-align: center;
 }
+
 
 /* Style pour les cellules du tableau */
 td {
@@ -73,70 +123,79 @@ td {
   padding: 10px;
 }
 
+tr {
+  background-color: #303030;
+  font-size: 18px;
+  color: #d7d2c0;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.451);
+  text-shadow: 0 0 2px rgba(255, 232, 168, 0.273);
+}
+
 /* Style pour les lignes impaires du tableau */
 tr:nth-child(odd) {
   background-color: #141414;
 }
 
-  /* Propriétés du footer */
-  footer {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    /*Aligns content center*/
-    height: 10vh;
-    background: linear-gradient(to bottom, #171717, #060606);
-    border-top: #fffcef 3px solid;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 0 5vw;
-    background-image: url('../img/Background.png');
-    /* Replace 'your-image.jpg' with the path to your image */
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-    bottom: 0px;
-    animation: moveBackground 15s infinite ease alternate;
+/* Propriétés du footer */
+footer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /*Aligns content center*/
+  height: 7.9vh;
+  background: linear-gradient(to bottom, #171717, #060606);
+  border-top: #fffcef 3px solid;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 0 5vw;
+  background-image: url('../img/Background.png');
+  /* Replace 'your-image.jpg' with the path to your image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  bottom: 0px;
+  animation: moveBackground 15s infinite ease alternate;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position-y: -80px;
   }
 
-  @keyframes moveBackground {
-    0% {
-      background-position-y: -80px;
-  }
   100% {
-      background-position-y: -600px;
+    background-position-y: -600px;
   }
-  }
+}
 
-  /* Link element styling */
-  footer a {
-    text-decoration: none;
-    display: flex;
-    width: 20%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /*Aligns content center*/
-    margin: 10px 3vw;
-    font-family: LobsterTwo;
-    font-size: 25px;
-    font-weight: bold;
-    color: #fff4cd;
-    box-shadow: inset 0 0 7px #413a215c;
-    text-shadow: 0 0 70px rgb(0, 0, 0);
-    /* color: #8c7936; */
-    /* text-shadow: 0 0 7px #ffffff48; */
-    /* box-shadow: inset 0 0 7px #413a2121; */
-    border-radius: 5rem;
-    transition: all 0.3s ease-out;
-    /* border-right: #ffffff24 3px solid; */
-    box-sizing: border-box;
-  }
+/* Link element styling */
+footer a {
+  text-decoration: none;
+  display: flex;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /*Aligns content center*/
+  margin: 10px 3vw;
+  font-family: LobsterTwo;
+  font-size: 23px;
+  font-weight: bold;
+  color: #fff4cd;
+  box-shadow: inset 0 0 7px #413a215c;
+  text-shadow: 0 0 70px rgb(0, 0, 0);
+  /* color: #8c7936; */
+  /* text-shadow: 0 0 7px #ffffff48; */
+  /* box-shadow: inset 0 0 7px #413a2121; */
+  border-radius: 5rem;
+  transition: all 0.3s ease-out;
+  /* border-right: #ffffff24 3px solid; */
+  box-sizing: border-box;
+}
 
-  footer a:hover{
-    color: #d6c278;
-    box-shadow: inset 0 0 100px #000000, 0 0 2px black;
-    text-shadow: 0 0 70px rgb(188, 188, 188);
-  } 
+footer a:hover {
+  color: #d6c278;
+  box-shadow: inset 0 0 100px #000000, 0 0 2px black;
+  text-shadow: 0 0 70px rgb(188, 188, 188);
+}
 
 /* Styles pour les formulaires */
 /* --------------------------- */
@@ -194,6 +253,8 @@ figure {
   align-content: center;
   text-align: center;
   box-sizing: border-box;
+  /* margin: auto 0px; */
+  flex-direction: column;
 }
 
 img {
@@ -241,6 +302,7 @@ img {
     border-radius: 6px;
     box-sizing: border-box;
     border: 2px solid #00000000;
+    cursor: pointer;
   }
 
   nav a:hover {
@@ -250,12 +312,13 @@ img {
     cursor: default;
     box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
     transition: all 0.2s;
+    cursor: pointer;
   }
 
   /* class current used to highlight current page li */
   .current {
     color: #1b1b1b;
-    box-shadow: inset 0 0 50px #d7c378 ;
+    box-shadow: inset 0 0 50px #d7c378;
     background: #d7c278bc;
   }
 
