@@ -19,7 +19,7 @@
             <ul class="menu">
                 <li><a class="current" href="index.php">Accueil</a></li>
                 <li><a href="./pages/sports.php">Sports</a></li>
-                <li><a href="./pages/events.php">Calendrier des épreuves</a></li>
+                <li><a href="./pages/events.php">Calendrier des évènements</a></li>
                 <li><a href="./pages/results.php">Résultats</a></li>
                 <li><a href="./pages/login.php">Accès administrateur</a></li>
             </ul>
@@ -36,6 +36,10 @@
         </figure>
     </main>
     <footer>
+<a href="">Plan de Site</a>
+<a href="">Cahier de charge</a>
+<a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
+    <!-- plan de site - cahier de charge - copyright? -->
 
     </footer>
 </body>

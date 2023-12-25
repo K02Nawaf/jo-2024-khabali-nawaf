@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/styles-computer.css">
     <link rel="stylesheet" href="../css/styles-responsive.css">
     <link rel="shortcut icon" href="../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Liste des Sports - Jeux Olympiques 2024</title>
+    <title>Liste des epreuve - Jeux Olympiques 2024</title>
 </head>
 
 <body>
@@ -17,21 +17,21 @@
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
                 <li><a href="../index.php">Accueil</a></li>
-                <li><a class="current" href="sports.php">Sports</a></li>
-                <li><a href="events.php">Calendrier des évènements</a></li>
+                <li><a href="sports.php">Sports</a></li>
+                <li><a class="current" href="events.php">Calendrier des évènements</a></li>
                 <li><a href="results.php">Résultats</a></li>
                 <li><a href="login.php">Accès administrateur</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Liste des Sports</h1>
+        <h1>Liste des evenement</h1>
         <?php
         require_once("../database/database.php");
 
         try {
             // Requête pour récupérer la liste des sports depuis la base de données
-            $query = "SELECT * FROM SPORT ORDER BY nom_sport";
+            $query = "SELECT * FROM epreuve ORDER BY date_epreuve";
             $statement = $connexion->prepare($query);
             $statement->execute();
 

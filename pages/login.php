@@ -48,11 +48,14 @@
             <input type="password" name="password" id="password" required><br><br>
             <input type="submit" value="Se connecter">
         </form>
-    </main>
-    <footer>
         <figure>
             <img src="../img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
         </figure>
+    </main>
+    <footer>
+        <a href="">Plan de Site</a>
+        <a href="">Cahier de charge</a>
+        <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
 </body>
 
