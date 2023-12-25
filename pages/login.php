@@ -28,6 +28,17 @@
         </nav>
     </header>
     <main>
+        <figure>
+            <img class="small" src="../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
+            <h1>Connexion</h1>
+        </figure>
+        <form action="../database/auth.php" method="post">
+            <label for="login">Login :</label>
+            <input type="text" name="login" id="login" required><br><br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password" required><br><br>
+            <input type="submit" value="Se connecter">
+        </form>
         <?php
         // Affichage un message d'erreur si erreur lors de la tentative de connexion
         session_start();
@@ -40,17 +51,6 @@
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
         ?>
-        <h1>Connexion</h1>
-        <form action="../database/auth.php" method="post">
-            <label for="login">Login :</label>
-            <input type="text" name="login" id="login" required><br><br>
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" id="password" required><br><br>
-            <input type="submit" value="Se connecter">
-        </form>
-        <figure>
-            <img src="../img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
-        </figure>
     </main>
     <footer>
         <a href="">Plan de Site</a>

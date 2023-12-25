@@ -60,9 +60,6 @@ ini_set("display_errors", 1);
             <a class="link-category" href="./admin-athletes/manage-athletes.php">Gestion Athlètes</a>
             <a class="link-category" href="./admin-results/manage-results.php">Gestion Résultats</a>
         </p>
-        <figure>
-            <img src="../../img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
-        </figure>
     </main>
     <footer>
         <a href="">Plan de Site</a>

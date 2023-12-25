@@ -49,14 +49,14 @@
             // Vérifier s'il y a des résultats
             if ($statement->rowCount() > 0) {
                 echo "<table>";
-                echo "<tr>
+                echo "<thead>
                 <th class='color'>Nom Athlète</th>
                 <th class='color'>Prénom Ahlète</th>
                 <th class='color'>Pays</th>
                 <th class='color'>Sport</th>
                 <th class='color'>Epreuve</th>
                 <th class='color'>Resultat</th>
-                </tr>";
+                </thead>";
 
                 // Afficher les données dans un tableau
                 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
