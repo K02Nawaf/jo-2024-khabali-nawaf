@@ -1,47 +1,45 @@
 <?php
-session_start(); // Démarre la session PHP pour stocker des variables de session.
+session_start(); // Start the PHP session to store session variables.
 
-require_once("database.php"); // Inclut le fichier de connexion à la base de données.
+require_once("database.php"); // Include the database connection file.
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { // Vérifie si la requête est une méthode POST (formulaire soumis).
-    $login = $_POST["login"]; // Récupère la valeur du champ "login" du formulaire.
-    $password = $_POST["password"]; // Récupère la valeur du champ "password" du formulaire.
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // Check if the request method is POST (form submitted).
+    $login = $_POST["login"]; // Retrieve the value of the "login" field from the form.
+    $password = $_POST["password"]; // Retrieve the value of the "password" field from the form.
 
-    // Prépare la requête SQL pour récupérer les informations de l'utilisateur avec le login spécifié.
+    // Prepare the SQL query to retrieve user information with the specified login.
     $query = "SELECT id_utilisateur, nom_utilisateur, prenom_utilisateur, login, password FROM UTILISATEUR WHERE login = :login";
-    $stmt = $connexion->prepare($query); // Prépare la requête avec PDO.
-    $stmt->bindParam(":login", $login, PDO::PARAM_STR); // Lie la variable :login à la valeur du login, évitant les injections SQL.
+    $stmt = $connexion->prepare($query); // Prepare the query with PDO.
+    $stmt->bindParam(":login", $login, PDO::PARAM_STR); // Bind the :login variable to the value of the login, preventing SQL injections.
 
-    if ($stmt->execute()) { // Exécute la requête préparée.
-        $row = $stmt->fetch(PDO::FETCH_ASSOC); // Récupère la première ligne de résultat de la requête.
+    if ($stmt->execute()) { // Execute the prepared query.
+        $row = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the first result row from the query.
 
         if ($row && password_verify($password, $row["password"])) {
-            // Si une ligne est récupérée et le mot de passe correspond à celui stocké dans la base de données.
-            $_SESSION["id_utilisateur"] = $row["id_utilisateur"]; // Stocke l'ID utilisateur dans la session.
-            $_SESSION["nom_utilisateur"] = $row["nom_utilisateur"]; // Stocke le nom de l'utilisateur dans la session.
-            $_SESSION["prenom_utilisateur"] = $row["prenom_utilisateur"]; // Stocke le prénom de l'utilisateur dans la session.
-            $_SESSION["login"] = $row["login"]; // Stocke le login de l'utilisateur dans la session.
+            // If a row is retrieved and the password matches the one stored in the database.
+            $_SESSION["id_utilisateur"] = $row["id_utilisateur"]; // Store the user ID in the session.
+            $_SESSION["nom_utilisateur"] = $row["nom_utilisateur"]; // Store the user's name in the session.
+            $_SESSION["prenom_utilisateur"] = $row["prenom_utilisateur"]; // Store the user's surname in the session.
+            $_SESSION["login"] = $row["login"]; // Store the user's login in the session.
 
-            header("location: ../pages/admin/admin.php"); // Redirige vers la page d'administration.
-            exit(); // Termine le script.
+            header("location: ../pages/admin/admin.php"); // Redirect to the administration page.
+            exit(); // Terminate the script.
         } else {
-            $_SESSION['error'] = "Login ou mot de passe incorrect.";
-            header("location: ../pages/login.php"); // Redirige vers la page de login avec un message d'erreur.
+            $_SESSION['error'] = "Login or password incorrect." . "Debug: Hashed Password - " . $row["password"] . "Debug: Entered Password - " . $password;
+            header("location: ../pages/login.php");
         }
     } else {
-        $_SESSION['error'] = "Erreur lors de l'exécution de la requête.";
-        header("location: ../pages/login.php"); // Redirige vers la page de login avec un message d'erreur.
+        $_SESSION['error'] = "Error executing the query."; // Set an error message in the session.
+        header("location: ../pages/login.php"); // Redirect to the login page with an error message.
     }
 
-    unset($stmt); // Libère la ressource associée à la requête préparée.
+    unset($stmt); // Free the resources associated with the prepared query.
 }
 
-unset($connexion); // Ferme la connexion à la base de données.
+unset($connexion); // Close the database connection.
 
-header("location: ../pages/login.php"); // Redirige vers la page de login par défaut.
-// Afficher les erreurs en PHP
-// (fonctionne à condition d’avoir activé l’option en local)
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-exit(); // Termine le script.
+header("location: ../pages/login.php"); // Redirect to the default login page.
+error_reporting(E_ALL); // Display PHP errors.
+ini_set("display_errors", 1); // Set PHP to display errors.
+exit(); // Terminate the script.
 ?>
