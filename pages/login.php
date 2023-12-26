@@ -34,7 +34,7 @@
         </figure>
         <form action="../database/auth.php" method="post">
             <label for="login">Login :</label>
-            <input type="text" name="login" id="login" required><br><br>
+            <input type="text" name="login" id="login" required autofocus><br><br>
             <label for="password">Mot de passe :</label>
             <input type="password" name="password" id="password" required><br><br>
             <input type="submit" value="Se connecter">

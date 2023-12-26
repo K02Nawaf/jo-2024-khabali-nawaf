@@ -37,17 +37,16 @@ h1 {
   background: linear-gradient(to top, #f6f0dd, #d6c278 90%);
   color: transparent;
   background-clip: text;
-  line-height: 70px;
+  line-height: 45px;
 }
 
 /* img sizing class */
 .small {
   width: 20%;
 }
-/* table size modifier */
-.smallTable{
-width: 60%;
-}
+
+
+
 /* Effet sur les liens au survol */
 .link-category:hover,
 .link-home:hover {
@@ -89,6 +88,10 @@ width: 60%;
   box-shadow: 0 0 7px #111111;
 }
 
+.table-container:focus {
+  outline: #b4a466a6 2px solid;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -107,13 +110,14 @@ th {
   font-weight: 700;
   text-shadow: none;
   /* box-shadow: 0 10px 15px -10px rgb(0, 0, 0); */
-  position:sticky;
+  position: sticky;
   /* height: 50px; */
   top: 0;
   color: #ffe791;
   box-shadow: 0 10px 15px -10px rgba(28, 28, 28, 0.42);
   background-color: #181818;
   text-align: center;
+  z-index: 90;
 }
 
 /* Style pour les cellules du tableau */
@@ -195,6 +199,7 @@ footer a:hover {
   box-shadow: inset 0 0 100px #000000, 0 0 2px black;
   text-shadow: 0 0 70px rgb(188, 188, 188);
 }
+
 footer a:focus {
   color: #d6c278;
   box-shadow: inset 0 0 100px #000000, 0 0 2px black;
@@ -254,7 +259,7 @@ input[type="submit"] {
   font-family: Syne;
   font-size: 20px;
   border-radius: 5rem;
-  
+
   /* Transition pour un effet de survol en douceur */
 }
 
@@ -266,9 +271,11 @@ input:focus {
 
 input[type="submit"]:hover {
   color: #d6c278;
-  box-shadow: inset 0 0 60px #000000, 0 0 2px black;
+  box-shadow: inset 0 0 35px #000000, 0 0 2px black;
   background-color: #303030;
+  text-shadow: 0 0 30px #d6c278;
 }
+
 input[type="submit"]:focus {
   color: #d6c278;
   box-shadow: inset 0 0 60px #000000, 0 0 2px black;
@@ -310,13 +317,18 @@ img {
     display: flex;
     font-size: 24px;
     box-sizing: border-box;
-    margin: 10px;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
   }
 
   nav li {
     width: auto;
     /* Largeur fixe pour chaque élément du menu */
     margin: 0px 20px;
+    margin-bottom: 10px;
     font-family: Lobster;
     box-shadow: 0px 0px 10px #060606;
     border-radius: 6px;
@@ -349,6 +361,7 @@ img {
     transition: all 0.2s;
     cursor: pointer;
   }
+
   nav a:focus {
     color: #d7c378;
     background-color: #1b1b1b;
@@ -359,6 +372,7 @@ img {
     cursor: pointer;
     outline: none;
   }
+
   /* class current used to highlight current page li */
   .current {
     color: #1b1b1b;
@@ -377,10 +391,63 @@ img {
 
   /* Affichage des données de l'utilisateur */
   .info-login {
-    margin: 50px auto;
+    margin: 10px auto;
+    margin-top: 0px;
     text-align: center;
-    font-size: 2vw;
+    font-size: 50px;
+    font-family: Syne;
+    background: linear-gradient(to top, #f6f0dd, #d6c278 90%);
+    color: transparent;
+    background-clip: text;
   }
+
+
+  .adminBody {
+    background: linear-gradient(to top, #fbecb0, #161616);
+  }
+
+  /* changes admin nav */
+  .adminNav {
+    background: linear-gradient(to bottom, #000000, #161616);
+    box-shadow: 0 0 7px black;
+    border-bottom: #b4a466 3px solid;
+  }
+
+  /* red stylings for button */
+  .red {
+    background-color: rgb(58, 0, 0);
+    color: #e29898;
+  }
+
+  .red:hover {
+    background-color: rgb(45, 0, 0);
+    border: 2px rgb(170, 0, 0) solid;
+    color: rgb(176, 0, 0);
+  }
+
+  .red:focus {
+    background-color: rgb(45, 0, 0);
+    border: 2px rgb(170, 0, 0) solid;
+    color: rgb(176, 0, 0);
+  }
+
+  /* styling for buttons in admin */
+  button {
+    background-color: #fbecb0;
+    border: #b4a466 3px solid;
+    font-family: Nunito;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #dccb86;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: scale(105%);
+  }
+
 
   /* Conteneur du <main> conteant les catégories utilisant flexbox */
   /* ------------------------------------------------------------- */
@@ -399,14 +466,14 @@ img {
   .link-category {
     display: flex;
     width: 40%;
-    height: 150px;
+    height: 50px;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     border-radius: 25px;
-    margin: 50px auto;
+    margin: 10px auto;
     background-color: #1b1b1b;
-    font-size: 3vw;
+    font-size: 25px;
     color: #d7c378;
     transition: color 0.3s ease, background-color 0.3s ease;
     /* Transition pour un effet de survol en douceur */
@@ -420,6 +487,49 @@ img {
     /* Changement de fond au survol */
   }
 
+  .link-category:focus {
+    color: #1b1b1b;
+    /* Changement de couleur au survol */
+    background-color: #d7c378;
+    /* Changement de fond au survol */
+    outline: none;
+  }
+
+  /* table size modifier */
+  .smallTable {
+    width: 60%;
+  }
+
+  .bigTable {
+    width: 95%;
+  }
+
+  .action-buttons {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 10px;
+    margin-top: -20px;
+
+  }
+
+  .action-buttons button {
+    background-color: #181818;
+    color: #ffe791;
+    border: 3px solid #d7c27800;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Syne;
+
+  }
+
+  .action-buttons button:hover {
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
+    border: 3px solid #d7c278c4;
+  }
+
+  /* outline: #b4a466a6 2px solid; */
 
 }
 

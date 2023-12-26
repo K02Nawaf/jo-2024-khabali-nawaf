@@ -23,6 +23,33 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
     <title>Liste des Sports - Jeux Olympiques 2024</title>
+    <style>
+        /* Ajoutez votre style CSS ici */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons button {
+            background-color: #1b1b1b;
+            color: #d7c378;
+            background-color: #d7c378;
+            color: #1b1b1b;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background-color: #1b1b1b;
+            color: #d7c378;
+        }
+    </style>
+
+
 </head>
 
 <body class="adminBody">
@@ -46,6 +73,10 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
             <h1>Liste des Sports</h1>
+            <div class="action-buttons">
+                <button onclick="openAddSportForm()">Ajouter un Sport +</button>
+                <!-- Autres boutons... -->
+            </div>
         </figure>
         <div class="table-container smallTable">
             <!-- Tableau des sports -->
@@ -84,10 +115,6 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
             ?>
-        </div>
-        <div class="action-buttons">
-            <button onclick="openAddSportForm()">Ajouter un Sport +</button>
-            <!-- Autres boutons... -->
         </div>
     </main>
     <footer>

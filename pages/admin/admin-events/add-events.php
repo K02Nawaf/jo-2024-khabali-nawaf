@@ -78,23 +78,27 @@ ini_set("display_errors", 1);
 
 <body>
     <header>
-        <nav>
+        <nav class="adminNav">
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
-                <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a href="manage-sports.php">Gestion Sports</a></li>
-                <li><a href="manage-places.php">Gestion Lieux</a></li>
-                <li><a href="manage-events.php">Gestion Calendrier</a></li>
-                <li><a href="manage-countries.php">Gestion Pays</a></li>
-                <li><a href="manage-gender.php">Gestion Genres</a></li>
-                <li><a href="manage-athletes.php">Gestion Athlètes</a></li>
-                <li><a href="manage-results.php">Gestion Résultats</a></li>
-                <li><a href="../../logout.php">Déconnexion</a></li>
+            <li><a href="../admin.php">Accueil Administration</a></li>
+                <li><a href="../admin-sports/manage-sports.php">Gestion Sports</a></li>
+                <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
+                <li><a class="current" href="./manage-events.php">Gestion Calendrier</a></li>
+                <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
+                <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
+                <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
+                <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
+                <li><a class="red" href="../logout.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
     <main>
+        <figure>
+        <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
         <h1>Ajouter un Sport</h1>
+        </figure>
+
         <?php
         if (isset($_SESSION['error'])) {
             echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
@@ -102,7 +106,7 @@ ini_set("display_errors", 1);
         }
         ?>
         <form action="add-sport.php" method="post"
-            onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce sport?')"">
+            onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce sport?')">
             <label for=" nomSport">Nom du Sport :</label>
             <input type="text" name="nomSport" id="nomSport" required>
             <input type="submit" value="Ajouter le Sport">
@@ -112,9 +116,9 @@ ini_set("display_errors", 1);
         </p>
     </main>
     <footer>
-        <figure>
-            <img src="../../../img/logo-jo-2024.png" alt="logo jeux olympiques 2024">
-        </figure>
+        <a href="">Plan de Site</a>
+        <a href="">Cahier de charge</a>
+        <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
 
 </body>

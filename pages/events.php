@@ -25,28 +25,27 @@
         </nav>
     </header>
     <main>
-    <figure>
+        <figure>
             <img class="small" src="../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
             <h1>Liste des evenement</h1>
         </figure>
-        <div class="table-container smallTable"> 
-        <?php
-        require_once("../database/database.php");
+        <div class="table-container smallTable">
+            <?php
+            require_once("../database/database.php");
 
-        try {
-            // Requête pour récupérer la liste des sports depuis la base de données
-            $query = "SELECT * FROM EPREUVE 
-            INNER JOIN LIEU ON EPREUVE.id_lieu = LIEU.id_lieu
-            INNER JOIN SPORT ON EPREUVE.id_sport = SPORT.id_sport
-            ORDER BY date_epreuve
-            ";
-            $statement = $connexion->prepare($query);
-            $statement->execute();
+            try {
+                // Requête pour récupérer la liste des sports depuis la base de données
+                $query = "SELECT * FROM EPREUVE 
+                INNER JOIN LIEU ON EPREUVE.id_lieu = LIEU.id_lieu
+                INNER JOIN SPORT ON EPREUVE.id_sport = SPORT.id_sport
+                ORDER BY date_epreuve";
+                $statement = $connexion->prepare($query);
+                $statement->execute();
 
-            // Vérifier s'il y a des résultats
-            if ($statement->rowCount() > 0) {
-                echo "<table>";
-                echo "<thead>
+                // Vérifier s'il y a des résultats
+                if ($statement->rowCount() > 0) {
+                    echo "<table>";
+                    echo "<thead>
                 <th class='color'>Epreuve</th>
                 <th class='color'>Sport</th>
                 <th class='color'>Date</th>
@@ -55,33 +54,33 @@
                 <th class='color'>Adresse du Lieu</th>
                 </thead>";
 
-                // Afficher les données dans un tableau
-                while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['nom_epreuve']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['date_epreuve']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['heure_epreuve']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['nom_lieu']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['adresse_lieu']) . "</td>";
+                    // Afficher les données dans un tableau
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['nom_epreuve']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['date_epreuve']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['heure_epreuve']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nom_lieu']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['adresse_lieu']) . "</td>";
 
-                    echo "</tr>";
+                        echo "</tr>";
+                    }
+
+                    echo "</table>";
+                } else {
+                    echo "<p>Aucun Epreuve trouvé.</p>";
                 }
-
-                echo "</table>";
-            } else {
-                echo "<p>Aucun Epreuve trouvé.</p>";
+            } catch (PDOException $e) {
+                echo "Erreur : " . $e->getMessage();
             }
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage();
-        }
-        // Afficher les erreurs en PHP
+            // Afficher les erreurs en PHP
 // (fonctionne à condition d’avoir activé l’option en local)
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-        ?>
+            error_reporting(E_ALL);
+            ini_set("display_errors", 1);
+            ?>
         </div>
-        
+
     </main>
     <footer>
         <a href="">Plan de Site</a>

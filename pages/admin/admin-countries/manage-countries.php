@@ -22,19 +22,19 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Liste des Sports - Jeux Olympiques 2024</title>
+    <title>Liste des Pays - Jeux Olympiques 2024</title>
 </head>
 
 <body class="adminBody">
     <header>
         <nav class="adminNav">
-            <!-- Menu vers les pages sports, events, et results -->
+            <!-- Menu vers les pages pays, events, et results -->
             <ul class="menu">
-            <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a class="current" href="./manage-sports.php">Gestion Sports</a></li>
+                <li><a href="../admin.php">Accueil Administration</a></li>
+                <li><a href="../admin-sports/manage-sports.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
-                <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
+                <li><a class="current" href="./manage-countries.php">Gestion Pays</a></li>
                 <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
                 <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
@@ -45,36 +45,36 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Liste des Sports</h1>
+            <h1>Liste des Pays</h1>
         </figure>
         <div class="table-container smallTable">
-            <!-- Tableau des sports -->
+            <!-- Tableau des pays -->
             <?php
             require_once("../../../database/database.php");
 
             try {
-                // Requête pour récupérer la liste des sports depuis la base de données
-                $query = "SELECT * FROM SPORT ORDER BY nom_sport";
+                // Requête pour récupérer la liste des pays depuis la base de données
+                $query = "SELECT * FROM PAYS ORDER BY nom_pays";
                 $statement = $connexion->prepare($query);
                 $statement->execute();
 
                 // Vérifier s'il y a des résultats
                 if ($statement->rowCount() > 0) {
-                    echo "<table><tr><th>Sport</th><th>Modifier</th><th>Supprimer</th></tr>";
+                    echo "<table><tr><th>Pays</th><th>Modifier</th><th>Supprimer</th></tr>";
 
                     // Afficher les données dans un tableau
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         // Assainir les données avant de les afficher
-                        echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
-                        echo "<td><button onclick='openModifySportForm({$row['id_sport']})'>Modifier</button></td>";
-                        echo "<td><button onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nom_pays']) . "</td>";
+                        echo "<td><button onclick='openModifyCountriesForm({$row['id_pays']})'>Modifier</button></td>";
+                        echo "<td><button onclick='deleteCountriesConfirmation({$row['id_pays']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 
                     echo "</table>";
                 } else {
-                    echo "<p>Aucun sport trouvé.</p>";
+                    echo "<p>Aucun pays trouvé.</p>";
                 }
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -86,7 +86,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             ?>
         </div>
         <div class="action-buttons">
-            <button onclick="openAddSportForm()">Ajouter un Sport +</button>
+            <button onclick="openAddCountriesForm()">Ajouter un Pays +</button>
             <!-- Autres boutons... -->
         </div>
     </main>
@@ -96,24 +96,24 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
     <script>
-        function openAddSportForm() {
+        function openAddCountriesForm() {
             // Ouvrir une fenêtre pop-up avec le formulaire de modification
             // L'URL contien un paramètre "id"
-            window.location.href = 'add-sport.php';
+            window.location.href = 'add-countries.php';
         }
 
-        function openModifySportForm(id_sport) {
-            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
-            // alert(id_sport);
-            window.location.href = 'modify-sport.php?id_sport=' + id_sport;
+        function openModifyCountriesForm(id_pays) {
+            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un pays
+            // alert(id_pays);
+            window.location.href = 'modify-countries.php?id_pays=' + id_pays;
         }
 
-        function deleteSportConfirmation(id_sport) {
-            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
-            if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
-                // Ajoutez ici le code pour la suppression du sport
-                // alert(id_sport);
-                window.location.href = 'delete-sport.php?id_sport=' + id_sport;
+        function deleteCountriesConfirmation(id_pays) {
+            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un pays
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce pays?")) {
+                // Ajoutez ici le code pour la suppression du pays
+                // alert(id_pays);
+                window.location.href = 'delete-countries.php?id_pays=' + id_pays;
             }
         }
     </script>

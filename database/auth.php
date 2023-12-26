@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Check if the request method is PO
             header("location: ../pages/admin/admin.php"); // Redirect to the administration page.
             exit(); // Terminate the script.
         } else {
-            $_SESSION['error'] = "Login or password incorrect." . "Debug: Hashed Password - " . $row["password"] . "Debug: Entered Password - " . $password;
+            $_SESSION['error'] = "Login or password incorrect.";
             header("location: ../pages/login.php");
         }
     } else {
