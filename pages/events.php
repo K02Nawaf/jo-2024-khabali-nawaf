@@ -29,7 +29,7 @@
             <img class="small" src="../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
             <h1>Liste des evenement</h1>
         </figure>
-        <div class="table-container smallTable">
+        <div class="table-container">
             <?php
             require_once("../database/database.php");
 

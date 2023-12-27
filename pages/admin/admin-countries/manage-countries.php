@@ -68,7 +68,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                         // Assainir les données avant de les afficher
                         echo "<td>" . htmlspecialchars($row['nom_pays']) . "</td>";
                         echo "<td><button onclick='openModifyCountriesForm({$row['id_pays']})'>Modifier</button></td>";
-                        echo "<td><button onclick='deleteCountriesConfirmation({$row['id_pays']})'>Supprimer</button></td>";
+                        echo "<td><button  class='delete'  onclick='deleteCountriesConfirmation({$row['id_pays']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 

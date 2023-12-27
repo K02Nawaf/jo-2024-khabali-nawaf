@@ -71,7 +71,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                         echo "<td>" . htmlspecialchars($row['cp_lieu']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['ville_lieu']) . "</td>";
                         echo "<td><button onclick='openModifyLieuForm({$row['id_lieu']})'>Modifier</button></td>";
-                        echo "<td><button onclick='deleteLieuConfirmation({$row['id_lieu']})'>Supprimer</button></td>";
+                        echo "<td><button  class='delete'  onclick='deleteLieuConfirmation({$row['id_lieu']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 

@@ -99,7 +99,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                         // Assainir les données avant de les afficher
                         echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
                         echo "<td><button onclick='openModifySportForm({$row['id_sport']})'>Modifier</button></td>";
-                        echo "<td><button onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
+                        echo "<td><button  class='delete' onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 

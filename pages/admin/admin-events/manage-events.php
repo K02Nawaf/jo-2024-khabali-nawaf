@@ -57,7 +57,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                 // Requête pour récupérer la liste des sports depuis la base de données
                 $query = "SELECT * FROM EPREUVE 
                 INNER JOIN LIEU ON EPREUVE.id_lieu = LIEU.id_lieu
-                INNER JOIN SPORT ON EPREUVE.id_epreuve = EPREUVE.id_epreuve
+                INNER JOIN SPORT ON EPREUVE.id_sport = SPORT.id_sport
                 ORDER BY date_epreuve";
                 $statement = $connexion->prepare($query);
                 $statement->execute();
@@ -70,7 +70,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                 <th class='color'>Sport</th>
                 <th class='color'>Date</th>
                 <th class='color'>Heure</th>
-                <th class='color'>Nom du Lieu</th>
+                <th class='color'>Lieu</th>
                 <th class='color'>Adresse du Lieu</th>
                 <th class='color'>Modifier</th>
                 <th class='color'>supprimer</th>
@@ -86,7 +86,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                         echo "<td>" . htmlspecialchars($row['nom_lieu']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['adresse_lieu']) . "</td>";
                         echo "<td><button onclick='openModifyEventsForm({$row['id_epreuve']})'>Modifier</button></td>";
-                        echo "<td><button onclick='deleteEventsConfirmation({$row['id_epreuve']})'>Supprimer</button></td>";
+                        echo "<td><button class='delete' onclick='deleteEventsConfirmation({$row['id_epreuve']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 
@@ -104,7 +104,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             ?>
         </div>
         <div class="action-buttons">
-            <button onclick="openAddEventsForm()">Ajouter un Sport +</button>
+            <button onclick="openAddEventsForm()">Ajouter un Epreuve +</button>
             <!-- Autres boutons... -->
         </div>
     </main>
@@ -121,15 +121,15 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         }
 
         function openModifyEventsForm(id_epreuve) {
-            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
+            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un Epreuve
             // alert(id_epreuve);
             window.location.href = 'modify-events.php?id_epreuve=' + id_epreuve;
         }
 
         function deleteEventsConfirmation(id_epreuve) {
-            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
-            if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
-                // Ajoutez ici le code pour la suppression du sport
+            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un Epreuve
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce Epreuve?")) {
+                // Ajoutez ici le code pour la suppression du Epreuve
                 // alert(id_epreuve);
                 window.location.href = 'delete-events.php?id_epreuve=' + id_epreuve;
             }

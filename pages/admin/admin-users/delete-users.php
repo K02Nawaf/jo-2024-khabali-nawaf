@@ -8,30 +8,30 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 
-// Vérifiez si l'ID du Epreuve est fourni dans l'URL
-if (!isset($_GET['id_epreuve'])) {
-    $_SESSION['error'] = "ID du evenement manquant.";
-    header("Location: manage-events.php");
+// Vérifiez si l'ID du sport est fourni dans l'URL
+if (!isset($_GET['id_sport'])) {
+    $_SESSION['error'] = "ID du sport manquant.";
+    header("Location: manage-sports.php");
     exit();
 } else {
-    $id_epreuve = filter_input(INPUT_GET, 'id_epreuve', FILTER_VALIDATE_INT);
-    // Vérifiez si l'ID du Epreuve est un entier valide
-    if (!$id_epreuve && $id_epreuve !== 0) {
-        $_SESSION['error'] = "ID du Epreuve invalide.";
-        header("Location: manage-events.php");
+    $id_sport = filter_input(INPUT_GET, 'id_sport', FILTER_VALIDATE_INT);
+    // Vérifiez si l'ID du sport est un entier valide
+    if (!$id_sport && $id_sport !== 0) {
+        $_SESSION['error'] = "ID du sport invalide.";
+        header("Location: manage-sports.php");
         exit();
     } else {
         try {
             // Récupérez l'ID de l'œuvre à supprimer depuis la requête GET
-            $id_epreuve = $_GET['id_epreuve'];
+            $id_sport = $_GET['id_sport'];
             // Préparez la requête SQL pour supprimer l'œuvre
-            $sql = "DELETE FROM EPREUVE WHERE id_epreuve = :id_epreuve";
+            $sql = "DELETE FROM SPORT WHERE id_sport = :id_sport";
             // Exécutez la requête SQL avec le paramètre
             $statement = $connexion->prepare($sql);
-            $statement->bindParam(':id_epreuve', $id_epreuve, PDO::PARAM_INT);
+            $statement->bindParam(':id_sport', $id_sport, PDO::PARAM_INT);
             $statement->execute();
             // Redirigez vers la page précédente après la suppression
-            header('Location: manage-events.php');
+            header('Location: manage-sports.php');
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
         }

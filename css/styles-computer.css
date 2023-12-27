@@ -248,7 +248,7 @@ input {
   color: #f5e9c0;
   font-family: Nunito;
   transition: all 0.3s ease;
-
+  border-radius: 5px;
 }
 
 input[type="submit"] {
@@ -266,7 +266,7 @@ input[type="submit"] {
 input:focus {
   outline: none;
   box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
-  border-radius: 5px;
+
 }
 
 input[type="submit"]:hover {
@@ -403,7 +403,8 @@ img {
 
 
   .adminBody {
-    background: linear-gradient(to top, #fbecb0, #161616);
+    /* background: linear-gradient(to top, #fbecb0, #161616); */
+    background: linear-gradient(to top, #f4e094, #000);
   }
 
   /* changes admin nav */
@@ -417,6 +418,7 @@ img {
   .red {
     background-color: rgb(58, 0, 0);
     color: #e29898;
+    border: 2px transparent solid;
   }
 
   .red:hover {
@@ -435,7 +437,7 @@ img {
   button {
     background-color: #fbecb0;
     border: #b4a466 3px solid;
-    font-family: Nunito;
+    font-family: Syne;
     font-weight: 500;
     border-radius: 5px;
     transition: all 0.2s ease;
@@ -448,6 +450,17 @@ img {
     transform: scale(105%);
   }
 
+  /* .delete {
+    color: rgb(40, 17, 17);
+    background-color: #fbbfb0;
+    border: #b46666 3px solid;
+  } */
+
+  .delete:hover {
+    background-color: #ff4646;
+    border: #9a0000 3px solid;
+    color: rgb(40, 17, 17);
+  }
 
   /* Conteneur du <main> conteant les catégories utilisant flexbox */
   /* ------------------------------------------------------------- */
@@ -509,7 +522,6 @@ img {
     /* justify-content: space-between; */
     margin-bottom: 10px;
     margin-top: -20px;
-
   }
 
   .action-buttons button {
@@ -529,7 +541,39 @@ img {
     border: 3px solid #d7c278c4;
   }
 
-  /* outline: #b4a466a6 2px solid; */
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    border: none;
+    background: #5e512724;
+    color: #f5e9c0;
+    font-family: Nunito;
+    transition: height 0.1s ease;
+    scrollbar-width: thin;
+    scrollbar-color: #ffe791 #000000;
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
+    /* border-radius: 5px; */
+
+  }
+
+  select option {
+    font-family: Nunito;
+    transition: all 0.1s ease;
+  }
+
+  select option:hover{ 
+    background-color: #c5a84a24;
+  }
+  select option:checked { 
+    background-color: #c3a43e6b;
+  }
 
 }
 
