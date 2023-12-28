@@ -22,34 +22,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Liste des Sports - Jeux Olympiques 2024</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .action-buttons button {
-            background-color: #1b1b1b;
-            color: #d7c378;
-            background-color: #d7c378;
-            color: #1b1b1b;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .action-buttons button:hover {
-            background-color: #1b1b1b;
-            color: #d7c378;
-        }
-    </style>
-
-
+    <title>Liste des genres - Jeux Olympiques 2024</title>
 </head>
 
 <body class="adminBody">
@@ -58,13 +31,15 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
             <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a class="current" href="./manage-sports.php">Gestion Sports</a></li>
+                <li><a href="../admin-sports/manage-sports.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
                 <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
-                <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
+                <li><a class="current" href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
                 <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
+                                
+<li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
                 <li><a class="red" href="../logout.php">Déconnexion</a></li>
             </ul>
         </nav>
@@ -72,34 +47,31 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Liste des Sports</h1>
+            <h1>Liste des Genres</h1>
         </figure>
-        <div class="action-buttons">
-            <button onclick="openAddSportForm()">Ajouter un Sport +</button>
-            <!-- Autres boutons... -->
-        </div>
+
         <div class="table-container smallTable">
-            <!-- Tableau des sports -->
+            <!-- Tableau des Genres -->
             <?php
             require_once("../../../database/database.php");
 
             try {
-                // Requête pour récupérer la liste des sports depuis la base de données
-                $query = "SELECT * FROM SPORT ORDER BY nom_sport";
+                // Requête pour récupérer la liste des Genres depuis la base de données
+                $query = "SELECT * FROM GENRE ORDER BY id_genre";
                 $statement = $connexion->prepare($query);
                 $statement->execute();
 
                 // Vérifier s'il y a des résultats
                 if ($statement->rowCount() > 0) {
-                    echo "<table><tr><th>Sport</th><th>Modifier</th><th>Supprimer</th></tr>";
+                    echo "<table><tr><th>Genre</th><th>Modifier</th><th>Supprimer</th></tr>";
 
                     // Afficher les données dans un tableau
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         // Assainir les données avant de les afficher
-                        echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
-                        echo "<td><button onclick='openModifySportForm({$row['id_sport']})'>Modifier</button></td>";
-                        echo "<td><button  class='delete'  onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nom_genre']) . "</td>";
+                        echo "<td><button onclick='openModifyGenderForm({$row['id_genre']})'>Modifier</button></td>";
+                        echo "<td><button  class='delete'  onclick='deleteGenderConfirmation({$row['id_genre']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 
@@ -116,6 +88,10 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             ini_set("display_errors", 1);
             ?>
         </div>
+        <div class="action-buttons">
+            <button onclick="openAddGenderForm()">Ajouter un Genre +</button>
+            <!-- Autres boutons... -->
+        </div>
     </main>
     <footer>
         <a href="">Plan de Site</a>
@@ -123,24 +99,24 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
     <script>
-        function openAddSportForm() {
+        function openAddGenderForm() {
             // Ouvrir une fenêtre pop-up avec le formulaire de modification
             // L'URL contien un paramètre "id"
-            window.location.href = 'add-sport.php';
+            window.location.href = 'add-gender.php';
         }
 
-        function openModifySportForm(id_sport) {
+        function openModifyGenderForm(id_genre) {
             // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
-            // alert(id_sport);
-            window.location.href = 'modify-sport.php?id_sport=' + id_sport;
+            // alert(id_genre);
+            window.location.href = 'modify-gender.php?id_genre=' + id_genre;
         }
 
-        function deleteSportConfirmation(id_sport) {
+        function deleteGenderConfirmation(id_genre) {
             // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
             if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
                 // Ajoutez ici le code pour la suppression du sport
-                // alert(id_sport);
-                window.location.href = 'delete-sport.php?id_sport=' + id_sport;
+                // alert(id_genre);
+                window.location.href = 'delete-gender.php?id_genre=' + id_genre;
             }
         }
     </script>

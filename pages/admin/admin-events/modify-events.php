@@ -20,7 +20,7 @@ $id_epreuve = filter_input(INPUT_GET, 'id_epreuve', FILTER_VALIDATE_INT);
 // Vérifiez si l'ID du lieu est un entier valide
 if (!$id_epreuve && $id_epreuve !== 0) {
     $_SESSION['error'] = "ID du lieu invalide.";
-    header("Location: manage-sports.php");
+    header("Location: manage-events.php");
     exit();
 }
 
@@ -133,7 +133,10 @@ try {
                 <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
                 <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
+
+                <li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
                 <li><a class="red" href="../logout.php">Déconnexion</a></li>
+
             </ul>
         </nav>
     </header>

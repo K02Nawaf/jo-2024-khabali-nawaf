@@ -11,57 +11,56 @@ if (!isset($_SESSION['login'])) {
 // Vérifiez si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Assurez-vous d'obtenir des données sécurisées et filtrées
-    $nomEpreuve = filter_input(INPUT_POST, 'nomEpreuve', FILTER_SANITIZE_STRING);
-    $dateEpreuve = filter_input(INPUT_POST, 'dateEpreuve', FILTER_SANITIZE_STRING);
-    $heureEpreuve = filter_input(INPUT_POST, 'heureEpreuve', FILTER_SANITIZE_STRING);
-    $idLieu = filter_input(INPUT_POST, 'idLieu', FILTER_SANITIZE_NUMBER_INT);
-    $idSport = filter_input(INPUT_POST, 'idSport', FILTER_SANITIZE_NUMBER_INT);
+    $nomAthlete = filter_input(INPUT_POST, 'nomAthlete', FILTER_SANITIZE_STRING);
+    $prenomAthlete = filter_input(INPUT_POST, 'prenomAthlete', FILTER_SANITIZE_STRING);
+    $idPays = filter_input(INPUT_POST, 'idPays', FILTER_SANITIZE_NUMBER_INT);
+    $idGenre = filter_input(INPUT_POST, 'idGenre', FILTER_SANITIZE_NUMBER_INT);
 
 
     // Vérifiez si le nom du lieu est vide
-    if (empty($nomEpreuve) || empty($dateEpreuve) || empty($heureEpreuve) || empty($idLieu) || empty($idSport)) {
+    if (empty($nomAthlete) || empty($prenomAthlete) || empty($idPays) || empty($idGenre)) {
         $_SESSION['error'] = "Please fill all fields.";
-        header("Location: add-events.php");
+        header("Location: modify-athletes.php=$id_athlete");
         exit();
     }
-
     try {
         // Vérifiez si le lieu existe déjà
-        $queryCheck = "SELECT id_epreuve FROM EPREUVE WHERE nom_epreuve = :nomEpreuve";
+        $queryCheck = "SELECT id_athlete FROM ATHLETE WHERE nom_athlete = :nomAthlete AND prenom_athlete = :prenomAthlete";
         $statementCheck = $connexion->prepare($queryCheck);
-        $statementCheck->bindParam(":nomEpreuve", $nomEpreuve, PDO::PARAM_STR);
+        $statementCheck->bindParam(":nomAthlete", $nomAthlete, PDO::PARAM_STR);
+        $statementCheck->bindParam(":prenomAthlete", $prenomAthlete, PDO::PARAM_STR);
         $statementCheck->execute();
 
         if ($statementCheck->rowCount() > 0) {
-            $_SESSION['error'] = "L'epreuve existe déjà.";
-            header("Location: add-events.php");
+            $_SESSION['error'] = "L'athlete existe déjà.";
+            header("Location: modify-athletes.php");
             exit();
         } else {
+
             // Requête pour ajouter un lieu
-            $query = "INSERT INTO EPREUVE (nom_epreuve, date_epreuve, heure_epreuve, id_lieu, id_sport) VALUES (:nomEpreuve, :dateEpreuve, :heureEpreuve, :idLieu, :idSport)";
+            $query = "INSERT INTO ATHLETE (nom_athlete, prenom_athlete, id_pays, id_genre) VALUES (:nomAthlete, :prenomAthlete, :idPays, :idGenre)";
             $statement = $connexion->prepare($query);
-            $statement->bindParam(":nomEpreuve", $nomEpreuve, PDO::PARAM_STR);
-            $statement->bindParam(":dateEpreuve", $dateEpreuve, PDO::PARAM_STR);
-            $statement->bindParam(":heureEpreuve", $heureEpreuve, PDO::PARAM_STR);
-            $statement->bindParam(":idLieu", $idLieu, PDO::PARAM_INT);
-            $statement->bindParam(":idSport", $idSport, PDO::PARAM_INT);
+            $statement->bindParam(":nomAthlete", $nomAthlete, PDO::PARAM_STR);
+            $statement->bindParam(":prenomAthlete", $prenomAthlete, PDO::PARAM_STR);
+            $statement->bindParam(":idPays", $idPays, PDO::PARAM_INT);
+            $statement->bindParam(":idGenre", $idGenre, PDO::PARAM_INT);
 
             // Exécutez la requête
-            var_dump($nomEpreuve, $dateEpreuve, $heureEpreuve, $idLieu, $idSport);
+            var_dump($nomAthlete, $prenomAthlete, $idPays, $idGenre);
             if ($statement->execute()) {
-                $_SESSION['success'] = "L' Epreuve a été ajouté avec succès.";
-                header("Location: manage-events.php");
+                $_SESSION['success'] = "L'Athlete a été ajouté avec succès.";
+                header("Location: manage-athletes.php");
                 exit();
             } else {
-                $_SESSION['error'] = "Erreur lors de l'ajout du Epreuve. " . print_r($statement->errorInfo(), true);
-                header("Location: add-events.php");
+                $_SESSION['error'] = "Erreur lors de l'ajout du Athlete. " . print_r($statement->errorInfo(), true);
+                header("Location: add-athletes.php");
                 exit();
             }
 
         }
     } catch (PDOException $e) {
         $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
-        header("Location: add-events.php");
+        header("Location: add-athletes.php");
         exit();
     }
 }
@@ -80,7 +79,7 @@ ini_set("display_errors", 1);
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Ajouter un Epreuve - Jeux Olympiques 2024</title>
+    <title>Ajouter un Athlete - Jeux Olympiques 2024</title>
     <style>
         /* Ajoutez votre style CSS ici */
     </style>
@@ -94,22 +93,20 @@ ini_set("display_errors", 1);
                 <li><a href="../admin.php">Accueil Administration</a></li>
                 <li><a href="../admin-sports/manage-sports.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
-                <li><a class="current" href="./manage-events.php">Gestion Calendrier</a></li>
+                <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
                 <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
                 <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
-                <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
+                <li><a class="current" href="./manage-athletes.php">Gestion Athlètes</a></li>
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
-                                         
-<li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
-<li><a class="red" href="../logout.php">Déconnexion</a></li>       
-
+                <li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
+                <li><a class="red" href="../logout.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Ajouter un Epreuve</h1>
+            <h1>Ajouter un Athlete</h1>
         </figure>
 
         <?php
@@ -118,26 +115,23 @@ ini_set("display_errors", 1);
             unset($_SESSION['error']);
         }
         ?>
-        <form action="add-events.php" method="post"
-            onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce Epreuve?')">
-            <label for="nomEpreuve">Nom d'Epreuve :</label>
-            <input type="text" name="nomEpreuve" id="nomEpreuve" placeholder="Exemple" required>
+        <form action="add-athletes.php" method="post"
+            onsubmit="return confirm('Êtes-vous sûr de vouloir ajouter ce Athlete?')">
+            <label for="nomAthlete">Nom d'Athlete :</label>
+            <input type="text" name="nomAthlete" id="nomAthlete" required>
 
-            <label for="dateEpreuve">Date :</label>
-            <input type="text" name="dateEpreuve" id="dateEpreuve" placeholder="AAAA-MM-JJ" required>
+            <label for="prenomAthlete">Prenom d'Athlete:</label>
+            <input type="text" name="prenomAthlete" id="prenomAthlete" required>
 
-            <label for="heureEpreuve">Heure :</label>
-            <input type="text" name="heureEpreuve" id="heureEpreuve" placeholder="00:00:00" required>
-
-            <label for="idLieu">Lieu :</label>
+            <label for="idPays">Pays :</label>
             <?php
             try {
-                $statement = $connexion->query("SELECT * FROM lieu");
+                $statement = $connexion->query("SELECT * FROM PAYS");
                 if ($statement->rowCount() > 0) {
-                    echo "<select name='idLieu' onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>";
+                    echo "<select name='idPays' onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>";
                     echo '<option value="">--Choose--</option>';
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<option value='" . $row["id_lieu"] . "'>" . $row["nom_lieu"] . "</option>";
+                        echo "<option value='" . $row["id_pays"] . "'>" . $row["nom_pays"] . "</option>";
                     }
                     echo "</select><br>";
                 } else {
@@ -148,15 +142,15 @@ ini_set("display_errors", 1);
             }
             ?>
 
-            <label for="idSport">Sport :</label>
+            <label for="idGenre">Genre :</label>
             <?php
             try {
-                $statement = $connexion->query("SELECT * FROM sport");
+                $statement = $connexion->query("SELECT * FROM GENRE");
                 if ($statement->rowCount() > 0) {
-                    echo "<select name='idSport' onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>";
+                    echo "<select name='idGenre' onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>";
                     echo '<option value="">--Choose--</option>';
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<option value='" . $row["id_sport"] . "'>" . $row["nom_sport"] . "</option>";
+                        echo "<option value='" . $row["id_genre"] . "'>" . $row["nom_genre"] . "</option>";
                     }
                     echo "</select><br>";
                 } else {
@@ -166,10 +160,10 @@ ini_set("display_errors", 1);
                 echo "Error: " . $e->getMessage();
             }
             ?>
-            <input type="submit" value="Ajouter l'Epreuve">
+            <input type="submit" value="Ajouter l'Athlete">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-events.php">Retour à la gestion des Epreuves</a>
+            <a class="link-home" href="manage-athletes.php">Retour à la gestion des Athletes</a>
         </p>
     </main>
     <footer>

@@ -123,7 +123,10 @@ try {
                 <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
                 <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
-                <li><a class="red" href="../logout.php">Déconnexion</a></li>
+                                         
+<li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
+<li><a class="red" href="../logout.php">Déconnexion</a></li>       
+
             </ul>
         </nav>
     </header>
