@@ -22,34 +22,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Liste des Sports - Jeux Olympiques 2024</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .action-buttons button {
-            background-color: #1b1b1b;
-            color: #d7c378;
-            background-color: #d7c378;
-            color: #1b1b1b;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .action-buttons button:hover {
-            background-color: #1b1b1b;
-            color: #d7c378;
-        }
-    </style>
-
-
+    <title>Liste des Resultats - Jeux Olympiques 2024</title>
 </head>
 
 <body class="adminBody">
@@ -57,58 +30,64 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         <nav class="adminNav">
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
-            <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a class="current" href="./manage-sports.php">Gestion Sports</a></li>
+                <li><a href="../admin.php">Accueil Administration</a></li>
+                <li><a href="../admin-sports/manage-sports.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
                 <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
                 <li><a href="../admin-gender/manage-gender.php">Gestion Genres</a></li>
                 <li><a href="../admin-athletes/manage-athletes.php">Gestion Athlètes</a></li>
-                <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
-                                         
-<li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
-<li><a class="red" href="../logout.php">Déconnexion</a></li>       
-
+                <li><a class="current" href="./manage-results.php">Gestion Résultats</a></li>
+                <li><a href="../admin-users/manage-users.php">Gestion Utilisateur</a></li>
+                <li><a class="red" href="../logout.php">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Liste des Sports</h1>
+            <h1>Liste des Resultats</h1>
         </figure>
-        <div class="action-buttons">
-            <button onclick="openAddSportForm()">Ajouter un Sport +</button>
-            <!-- Autres boutons... -->
-        </div>
-        <div class="table-container smallTable">
+
+        <div class="table-container">
             <!-- Tableau des sports -->
             <?php
             require_once("../../../database/database.php");
 
             try {
                 // Requête pour récupérer la liste des sports depuis la base de données
-                $query = "SELECT * FROM SPORT ORDER BY nom_sport";
+                $query = "SELECT * FROM PARTICIPER 
+                INNER JOIN EPREUVE ON PARTICIPER.id_epreuve = EPREUVE.id_epreuve
+                INNER JOIN ATHLETE ON PARTICIPER.id_athlete = ATHLETE.id_athlete
+                ORDER BY PARTICIPER.id_epreuve";
                 $statement = $connexion->prepare($query);
                 $statement->execute();
 
                 // Vérifier s'il y a des résultats
                 if ($statement->rowCount() > 0) {
-                    echo "<table><tr><th>Sport</th><th>Modifier</th><th>Supprimer</th></tr>";
+                    echo "<table>";
+                    echo "<thead>
+                <th class='color'>Athlete</th>
+                <th class='color'>Epreuve</th>
+                <th class='color'>Resultat</th>
+                <th class='color'>Modifier</th>
+                <th class='color'>supprimer</th>
+                </thead>";
 
                     // Afficher les données dans un tableau
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
-                        // Assainir les données avant de les afficher
-                        echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
-                        echo "<td><button onclick='openModifySportForm({$row['id_sport']})'>Modifier</button></td>";
-                        echo "<td><button  class='delete' onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nom_athlete']) . " " . htmlspecialchars($row['prenom_athlete']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nom_epreuve']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['resultat']) . "</td>";
+                        echo "<td><button onclick='openModifyResultsForm(\"{$row['nom_athlete']} {$row['prenom_athlete']}\", \"{$row['resultat']}\")'>Modifier</button></td>";
+                        echo "<td><button  class='delete' onclick='deleteResultsConfirmation(\"{$row['resultat']}\")'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 
                     echo "</table>";
                 } else {
-                    echo "<p>Aucun sport trouvé.</p>";
+                    echo "<p>Aucun Resultat trouvé.</p>";
                 }
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -119,6 +98,10 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             ini_set("display_errors", 1);
             ?>
         </div>
+        <div class="action-buttons">
+            <button onclick="openAddResultsForm()">Ajouter un Resultat +</button>
+            <!-- Autres boutons... -->
+        </div>
     </main>
     <footer>
         <a href="">Plan de Site</a>
@@ -126,24 +109,27 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
     <script>
-        function openAddSportForm() {
+        function openAddResultsForm() {
             // Ouvrir une fenêtre pop-up avec le formulaire de modification
             // L'URL contien un paramètre "id"
-            window.location.href = 'add-sport.php';
+            window.location.href = 'add-results.php';
         }
 
-        function openModifySportForm(id_sport) {
-            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
-            // alert(id_sport);
-            window.location.href = 'modify-sport.php?id_sport=' + id_sport;
+        function openModifyResultsForm(id_athlete, resultat) {
+            // Now you can use id_athlete and resultat in your URL
+            var encodedResultat = encodeURIComponent(resultat);
+            window.location.href = 'modify-results.php?id_athlete=' + id_athlete + '&resultat=' + encodedResultat;
         }
 
-        function deleteSportConfirmation(id_sport) {
-            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
-            if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
-                // Ajoutez ici le code pour la suppression du sport
-                // alert(id_sport);
-                window.location.href = 'delete-sport.php?id_sport=' + id_sport;
+
+
+        function deleteResultsConfirmation(resultat) {
+            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un Résultat
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce résultat?")) {
+                // Ajoutez ici le code pour la suppression du Résultat
+                // alert(resultat);
+                console.log('URL to be redirected:', 'delete-results.php?resultat=' + encodeURIComponent(resultat));
+                window.location.href = 'delete-results.php?resultat=' + encodeURIComponent(resultat);
             }
         }
     </script>
