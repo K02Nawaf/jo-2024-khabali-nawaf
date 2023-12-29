@@ -9,18 +9,18 @@ if (!isset($_SESSION['login'])) {
 }
 
 // Vérifiez si l'ID du sport est fourni dans l'URL
-if (!isset($_GET['id_sport'])) {
+if (!isset($_GET['id_utilisateur'])) {
     $_SESSION['error'] = "ID du sport manquant.";
-    header("Location: manage-sports.php");
+    header("Location: manage-users.php");
     exit();
 }
 
-$id_sport = filter_input(INPUT_GET, 'id_sport', FILTER_VALIDATE_INT);
+$id_utilisateur = filter_input(INPUT_GET, 'id_utilisateur', FILTER_VALIDATE_INT);
 
 // Vérifiez si l'ID du sport est un entier valide
-if (!$id_sport && $id_sport !== 0) {
+if (!$id_utilisateur && $id_utilisateur !== 0) {
     $_SESSION['error'] = "ID du sport invalide.";
-    header("Location: manage-sports.php");
+    header("Location: manage-users.php");
     exit();
 }
 
@@ -32,64 +32,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifiez si le nom du sport est vide
     if (empty($nomSport)) {
         $_SESSION['error'] = "Le nom du sport ne peut pas être vide.";
-        header("Location: modify-sport.php?id_sport=$id_sport");
+        header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
         exit();
     }
 
     try {
         // Vérifiez si le sport existe déjà
-        $queryCheck = "SELECT id_sport FROM SPORT WHERE nom_sport = :nomSport AND id_sport <> :idSport";
+        $queryCheck = "SELECT id_utilisateur FROM SPORT WHERE nom_sport = :nomSport AND id_utilisateur <> :idUser";
         $statementCheck = $connexion->prepare($queryCheck);
         $statementCheck->bindParam(":nomSport", $nomSport, PDO::PARAM_STR);
-        $statementCheck->bindParam(":idSport", $id_sport, PDO::PARAM_INT);
+        $statementCheck->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
         $statementCheck->execute();
 
         if ($statementCheck->rowCount() > 0) {
             $_SESSION['error'] = "Le sport existe déjà.";
-            header("Location: modify-sport.php?id_sport=$id_sport");
+            header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
             exit();
         }
 
         // Requête pour mettre à jour le sport
-        $query = "UPDATE SPORT SET nom_sport = :nomSport WHERE id_sport = :idSport";
+        $query = "UPDATE SPORT SET nom_sport = :nomSport WHERE id_utilisateur = :idUser";
         $statement = $connexion->prepare($query);
         $statement->bindParam(":nomSport", $nomSport, PDO::PARAM_STR);
-        $statement->bindParam(":idSport", $id_sport, PDO::PARAM_INT);
+        $statement->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
 
         // Exécutez la requête
         if ($statement->execute()) {
             $_SESSION['success'] = "Le sport a été modifié avec succès.";
-            header("Location: manage-sports.php");
+            header("Location: manage-users.php");
             exit();
         } else {
             $_SESSION['error'] = "Erreur lors de la modification du sport.";
-            header("Location: modify-sport.php?id_sport=$id_sport");
+            header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
             exit();
         }
     } catch (PDOException $e) {
         $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
-        header("Location: modify-sport.php?id_sport=$id_sport");
+        header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
         exit();
     }
 }
 
 // Récupérez les informations du sport pour affichage dans le formulaire
 try {
-    $querySport = "SELECT nom_sport FROM SPORT WHERE id_sport = :idSport";
+    $querySport = "SELECT nom_sport FROM SPORT WHERE id_utilisateur = :idUser";
     $statementSport = $connexion->prepare($querySport);
-    $statementSport->bindParam(":idSport", $id_sport, PDO::PARAM_INT);
+    $statementSport->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
     $statementSport->execute();
 
     if ($statementSport->rowCount() > 0) {
         $sport = $statementSport->fetch(PDO::FETCH_ASSOC);
     } else {
         $_SESSION['error'] = "Sport non trouvé.";
-        header("Location: manage-sports.php");
+        header("Location: manage-users.php");
         exit();
     }
 } catch (PDOException $e) {
     $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
-    header("Location: manage-sports.php");
+    header("Location: manage-users.php");
     exit();
 }
 ?>
@@ -116,7 +116,7 @@ try {
             <!-- Menu vers les pages sports, events, et results -->
             <ul class="menu">
             <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a href="./manage-sports.php">Gestion Sports</a></li>
+                <li><a href="./manage-users.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
                 <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
@@ -139,7 +139,7 @@ try {
             unset($_SESSION['error']);
         }
         ?>
-        <form action="modify-sport.php?id_sport=<?php echo $id_sport; ?>" method="post"
+        <form action="modify-users.php?id_utilisateur=<?php echo $id_utilisateur; ?>" method="post"
             onsubmit="return confirm('Êtes-vous sûr de vouloir modifier ce sport?')">
             <label for=" nomSport">Nom du Sport :</label>
             <input type="text" name="nomSport" id="nomSport"
@@ -147,12 +147,12 @@ try {
             <input type="submit" value="Modifier le Sport">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-sports.php">Retour à la gestion des sports</a>
+            <a class="link-home" href="manage-users.php">Retour à la gestion des sports</a>
         </p>
     </main>
     <footer>
         <a href="">Plan de Site</a>
-        <a href="">Cahier de charge</a>
+        <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
 </body>

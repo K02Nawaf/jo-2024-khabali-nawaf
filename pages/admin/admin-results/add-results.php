@@ -141,12 +141,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
         <p class="paragraph-link">
-            <a class="link-home" href="manage-results.php">Retour à la gestion des Athletes</a>
+            <a class="link-home" href="manage-results.php">Retour à la gestion des Résultat</a>
         </p>
     </main>
     <footer>
         <a href="">Plan de Site</a>
-        <a href="">Cahier de charge</a>
+        <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
 

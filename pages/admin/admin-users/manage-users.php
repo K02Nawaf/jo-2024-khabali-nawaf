@@ -22,7 +22,7 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Liste des Sports - Jeux Olympiques 2024</title>
+    <title>Liste des Utilisateur - Jeux Olympiques 2024</title>
 </head>
 
 <body class="adminBody">
@@ -40,43 +40,57 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                 <li><a href="../admin-results/manage-results.php">Gestion Résultats</a></li>
                 <li><a class="current" href="./manage-users.php">Gestion Utilisateur</a></li>
                 <li><a class="red" href="../logout.php">Déconnexion</a></li>
-
             </ul>
         </nav>
     </header>
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Liste des Sports</h1>
+            <h1>Liste des Utilisateur</h1>
         </figure>
         <div class="table-container smallTable">
-            <!-- Tableau des sports -->
             <?php
             require_once("../../../database/database.php");
 
             try {
-                // Requête pour récupérer la liste des sports depuis la base de données
-                $query = "SELECT * FROM SPORT ORDER BY nom_sport";
+                // Requête pour récupérer la liste des utilisateurs depuis la base de données
+                if ($login === "admin") {
+                    // If the user is an admin, retrieve all users
+                    $query = "SELECT * FROM UTILISATEUR ORDER BY id_utilisateur";
+                } else {
+                    // If the user is not an admin, retrieve only their own account
+                    $query = "SELECT * FROM UTILISATEUR WHERE login = :login";
+                }
+
                 $statement = $connexion->prepare($query);
+
+                // Bind the login parameter if it's a non-admin user
+                if ($login !== "admin") {
+                    $statement->bindParam(":login", $login, PDO::PARAM_STR);
+                }
+
                 $statement->execute();
 
                 // Vérifier s'il y a des résultats
                 if ($statement->rowCount() > 0) {
-                    echo "<table><tr><th>Sport</th><th>Modifier</th><th>Supprimer</th></tr>";
+                    echo "<table><tr><th>Nom Utilisateur</th><th>Prenom Utilisateur</th><th>Login</th><th>Password</th><th>Modifier</th><th>Supprimer</th></tr>";
 
                     // Afficher les données dans un tableau
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         // Assainir les données avant de les afficher
-                        echo "<td>" . htmlspecialchars($row['nom_sport']) . "</td>";
-                        echo "<td><button onclick='openModifySportForm({$row['id_sport']})'>Modifier</button></td>";
-                        echo "<td><button  class='delete' onclick='deleteSportConfirmation({$row['id_sport']})'>Supprimer</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nom_utilisateur']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['prenom_utilisateur']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['login']) . "</td>";
+                        echo "<td>*****</td>";
+                        echo "<td><button onclick='openModifyUserForm({$row['id_utilisateur']})'>Modifier</button></td>";
+                        echo "<td><button  class='delete' onclick='deleteUserConfirmation({$row['id_utilisateur']})'>Supprimer</button></td>";
                         echo "</tr>";
                     }
 
                     echo "</table>";
                 } else {
-                    echo "<p>Aucun sport trouvé.</p>";
+                    echo "<p>Aucun utilisateur trouvé.</p>";
                 }
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -88,34 +102,38 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
             ?>
         </div>
         <div class="action-buttons">
-            <button onclick="openAddSportForm()">Ajouter un Sport +</button>
-            <!-- Autres boutons... -->
+            <?php
+            // Show the "Ajouter un utilisateur" button only for Admin
+            if ($login === "admin") {
+                echo "<button onclick=\"openAddUserForm()\">Ajouter un utilisateur +</button>";
+            }
+            ?>
         </div>
     </main>
     <footer>
         <a href="">Plan de Site</a>
-        <a href="">Cahier de charge</a>
+        <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
     <script>
-        function openAddSportForm() {
+        function openAddUserForm() {
             // Ouvrir une fenêtre pop-up avec le formulaire de modification
             // L'URL contien un paramètre "id"
-            window.location.href = 'add-sport.php';
+            window.location.href = 'add-users.php';
         }
 
-        function openModifySportForm(id_sport) {
-            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
-            // alert(id_sport);
-            window.location.href = 'modify-sport.php?id_sport=' + id_sport;
+        function openModifyUserForm(id_utilisateur) {
+            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un users
+            // alert(id_utilisateur);
+            window.location.href = 'modify-users.php?id_utilisateur=' + id_utilisateur;
         }
 
-        function deleteSportConfirmation(id_sport) {
-            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
-            if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
-                // Ajoutez ici le code pour la suppression du sport
-                // alert(id_sport);
-                window.location.href = 'delete-sport.php?id_sport=' + id_sport;
+        function deleteUserConfirmation(id_utilisateur) {
+            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un users
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce user?")) {
+                // Ajoutez ici le code pour la suppression du users
+                // alert(id_utilisateur);
+                window.location.href = 'delete-users.php?id_utilisateur=' + id_utilisateur;
             }
         }
     </script>

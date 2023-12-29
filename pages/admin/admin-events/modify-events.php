@@ -63,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // Exécutez la requête
         if ($statement->execute()) {
-            $_SESSION['success'] = "L'Evenement a été modifié avec succès.";
+            $_SESSION['success'] = "L'Epreuve a été modifié avec succès.";
             header("Location: manage-events.php");
             exit();
         } else {
-            $_SESSION['error'] = "Erreur lors de la modification du Evenement.";
+            $_SESSION['error'] = "Erreur lors de la modification du Epreuve.";
             header("Location: modify-events.php?id_epreuve=$id_epreuve");
             exit();
         }
@@ -114,7 +114,7 @@ try {
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Modifier une Evenement - Jeux Olympiques 2024</title>
+    <title>Modifier une Epreuve - Jeux Olympiques 2024</title>
     <style>
         /* Ajoutez votre style CSS ici */
     </style>
@@ -143,7 +143,7 @@ try {
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Modifier une Evenement</h1>
+            <h1>Modifier une Epreuve</h1>
         </figure>
         <?php
         if (isset($_SESSION['error'])) {
@@ -153,7 +153,7 @@ try {
         ?>
         <form action="modify-events.php?id_epreuve=<?php echo $id_epreuve; ?>" method="post"
             onsubmit="return confirm('Êtes-vous sûr de vouloir modifier ce lieu?')">
-            <label for=" nomLieu">Nom du Evenement :</label>
+            <label for=" nomLieu">Nom du Epreuve :</label>
             <input type="text" placeholder="Exemple" name="nomEpreuve" id="nomEpreuve"
                 value="<?php echo htmlspecialchars($Epreuve['nom_epreuve']); ?>" required>
 
@@ -204,7 +204,7 @@ try {
             ?>
 
 
-            <input type="submit" value="Modifier l'Evenement">
+            <input type="submit" value="Modifier l'Epreuve">
         </form>
         <p class="paragraph-link">
             <a class="link-home" href="manage-events.php">Retour à la gestion des Evenements</a>
@@ -212,7 +212,7 @@ try {
     </main>
     <footer>
         <a href="">Plan de Site</a>
-        <a href="">Cahier de charge</a>
+        <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
 </body>
