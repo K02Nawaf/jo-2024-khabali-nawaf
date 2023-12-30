@@ -8,18 +8,18 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 
-// Vérifiez si l'ID du sport est fourni dans l'URL
+// Vérifiez si l'ID de l'utilisateur est fourni dans l'URL
 if (!isset($_GET['id_utilisateur'])) {
-    $_SESSION['error'] = "ID du sport manquant.";
+    $_SESSION['error'] = "ID de l'utilisateur manquant.";
     header("Location: manage-users.php");
     exit();
 }
 
 $id_utilisateur = filter_input(INPUT_GET, 'id_utilisateur', FILTER_VALIDATE_INT);
 
-// Vérifiez si l'ID du sport est un entier valide
+// Vérifiez si l'ID de l'utilisateur est un entier valide
 if (!$id_utilisateur && $id_utilisateur !== 0) {
-    $_SESSION['error'] = "ID du sport invalide.";
+    $_SESSION['error'] = "ID de l'utilisateur invalide.";
     header("Location: manage-users.php");
     exit();
 }
@@ -27,42 +27,36 @@ if (!$id_utilisateur && $id_utilisateur !== 0) {
 // Vérifiez si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Assurez-vous d'obtenir des données sécurisées et filtrées
-    $nomSport = filter_input(INPUT_POST, 'nomSport', FILTER_SANITIZE_STRING);
+    $nomUtilisateur = filter_input(INPUT_POST, 'nomUtilisateur', FILTER_SANITIZE_STRING);
+    $prenomUtilisateur = filter_input(INPUT_POST, 'prenomUtilisateur', FILTER_SANITIZE_STRING);
+    $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-    // Vérifiez si le nom du sport est vide
-    if (empty($nomSport)) {
-        $_SESSION['error'] = "Le nom du sport ne peut pas être vide.";
+    // Vérifiez si les champs obligatoires sont vides
+    if (empty($nomUtilisateur) || empty($prenomUtilisateur) || empty($login) || empty($password)) {
+        $_SESSION['error'] = "Tous les champs doivent être remplis.";
         header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
         exit();
     }
 
     try {
-        // Vérifiez si le sport existe déjà
-        $queryCheck = "SELECT id_utilisateur FROM SPORT WHERE nom_sport = :nomSport AND id_utilisateur <> :idUser";
-        $statementCheck = $connexion->prepare($queryCheck);
-        $statementCheck->bindParam(":nomSport", $nomSport, PDO::PARAM_STR);
-        $statementCheck->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
-        $statementCheck->execute();
-
-        if ($statementCheck->rowCount() > 0) {
-            $_SESSION['error'] = "Le sport existe déjà.";
-            header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
-            exit();
-        }
-
-        // Requête pour mettre à jour le sport
-        $query = "UPDATE SPORT SET nom_sport = :nomSport WHERE id_utilisateur = :idUser";
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        // Requête pour mettre à jour les informations de l'utilisateur
+        $query = "UPDATE UTILISATEUR SET nom_utilisateur = :nomUtilisateur, prenom_utilisateur = :prenomUtilisateur, login = :login, password = :password WHERE id_utilisateur = :idUser";
         $statement = $connexion->prepare($query);
-        $statement->bindParam(":nomSport", $nomSport, PDO::PARAM_STR);
+        $statement->bindParam(":nomUtilisateur", $nomUtilisateur, PDO::PARAM_STR);
+        $statement->bindParam(":prenomUtilisateur", $prenomUtilisateur, PDO::PARAM_STR);
+        $statement->bindParam(":login", $login, PDO::PARAM_STR);
+        $statement->bindParam(":password", $password, PDO::PARAM_STR);
         $statement->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
 
         // Exécutez la requête
         if ($statement->execute()) {
-            $_SESSION['success'] = "Le sport a été modifié avec succès.";
+            $_SESSION['success'] = "Les informations de l'utilisateur ont été modifiées avec succès.";
             header("Location: manage-users.php");
             exit();
         } else {
-            $_SESSION['error'] = "Erreur lors de la modification du sport.";
+            $_SESSION['error'] = "Erreur lors de la modification des informations de l'utilisateur.";
             header("Location: modify-users.php?id_utilisateur=$id_utilisateur");
             exit();
         }
@@ -73,17 +67,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Récupérez les informations du sport pour affichage dans le formulaire
+// Récupérez les informations de l'utilisateur pour affichage dans le formulaire
 try {
-    $querySport = "SELECT nom_sport FROM SPORT WHERE id_utilisateur = :idUser";
-    $statementSport = $connexion->prepare($querySport);
-    $statementSport->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
-    $statementSport->execute();
+    $queryUser = "SELECT nom_utilisateur, prenom_utilisateur, login FROM UTILISATEUR WHERE id_utilisateur = :idUser";
+    $statementUser = $connexion->prepare($queryUser);
+    $statementUser->bindParam(":idUser", $id_utilisateur, PDO::PARAM_INT);
+    $statementUser->execute();
 
-    if ($statementSport->rowCount() > 0) {
-        $sport = $statementSport->fetch(PDO::FETCH_ASSOC);
+    if ($statementUser->rowCount() > 0) {
+        $user = $statementUser->fetch(PDO::FETCH_ASSOC);
     } else {
-        $_SESSION['error'] = "Sport non trouvé.";
+        $_SESSION['error'] = "Utilisateur non trouvé.";
         header("Location: manage-users.php");
         exit();
     }
@@ -104,19 +98,15 @@ try {
     <link rel="stylesheet" href="../../../css/styles-computer.css">
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
-    <title>Modifier un Sport - Jeux Olympiques 2024</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-    </style>
+    <title>Modifier un Utilisateur - Jeux Olympiques 2024</title>
 </head>
 
 <body>
     <header>
         <nav class="adminNav">
-            <!-- Menu vers les pages sports, events, et results -->
-            <ul class="menu">
+        <ul class="menu">
             <li><a href="../admin.php">Accueil Administration</a></li>
-                <li><a href="./manage-users.php">Gestion Sports</a></li>
+                <li><a href="./manage-sports.php">Gestion Sports</a></li>
                 <li><a href="../admin-places/manage-places.php">Gestion Lieux</a></li>
                 <li><a href="../admin-events/manage-events.php">Gestion Calendrier</a></li>
                 <li><a href="../admin-countries/manage-countries.php">Gestion Pays</a></li>
@@ -131,7 +121,7 @@ try {
     <main>
         <figure>
             <img class="small" src="../../../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Modifier un Sport</h1>
+            <h1>Modifier un Utilisateur</h1>
         </figure>
         <?php
         if (isset($_SESSION['error'])) {
@@ -140,14 +130,22 @@ try {
         }
         ?>
         <form action="modify-users.php?id_utilisateur=<?php echo $id_utilisateur; ?>" method="post"
-            onsubmit="return confirm('Êtes-vous sûr de vouloir modifier ce sport?')">
-            <label for=" nomSport">Nom du Sport :</label>
-            <input type="text" name="nomSport" id="nomSport"
-                value="<?php echo htmlspecialchars($sport['nom_sport']); ?>" required>
-            <input type="submit" value="Modifier le Sport">
+            onsubmit="return confirm('Êtes-vous sûr de vouloir modifier cet utilisateur?')">
+            <label for="nomUtilisateur">Nom de l'Utilisateur :</label>
+            <input type="text" name="nomUtilisateur" id="nomUtilisateur"
+                value="<?php echo htmlspecialchars($user['nom_utilisateur']); ?>" required>
+            <label for="prenomUtilisateur">Prenom de l'Utilisateur :</label>
+            <input type="text" name="prenomUtilisateur" id="prenomUtilisateur"
+                value="<?php echo htmlspecialchars($user['prenom_utilisateur']); ?>" required>
+            <label for="login">Login :</label>
+            <input type="text" name="login" id="login" value="<?php echo htmlspecialchars($user['login']); ?>"
+                required>
+            <label for="password">Password :</label>
+            <input type="password" name="password" id="password" required>
+            <input type="submit" value="Modifier l'Utilisateur">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-users.php">Retour à la gestion des sports</a>
+            <a class="link-home" href="manage-users.php">Retour</a>
         </p>
     </main>
     <footer>

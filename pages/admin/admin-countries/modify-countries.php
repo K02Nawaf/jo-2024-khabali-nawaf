@@ -149,7 +149,7 @@ try {
             <input type="submit" value="Modifier le Pays">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-countries.php">Retour à la gestion des pays</a>
+            <a class="link-home" href="manage-countries.php">Retour</a>
         </p>
     </main>
     <footer>

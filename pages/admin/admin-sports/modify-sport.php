@@ -149,7 +149,7 @@ try {
             <input type="submit" value="Modifier le Sport">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-sports.php">Retour à la gestion des sports</a>
+            <a class="link-home" href="manage-sports.php">Retour</a>
         </p>
     </main>
     <footer>

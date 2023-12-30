@@ -115,7 +115,7 @@ ini_set("display_errors", 1);
             <input type="submit" value="Ajouter le pays">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-countries.php">Retour à la gestion des pays</a>
+            <a class="link-home" href="manage-countries.php">Retour</a>
         </p>
     </main>
     <footer>

@@ -61,33 +61,42 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
                     // If the user is not an admin, retrieve only their own account
                     $query = "SELECT * FROM UTILISATEUR WHERE login = :login";
                 }
-
+            
                 $statement = $connexion->prepare($query);
-
+            
                 // Bind the login parameter if it's a non-admin user
                 if ($login !== "admin") {
                     $statement->bindParam(":login", $login, PDO::PARAM_STR);
                 }
-
+            
                 $statement->execute();
-
+            
                 // Vérifier s'il y a des résultats
                 if ($statement->rowCount() > 0) {
                     echo "<table><tr><th>Nom Utilisateur</th><th>Prenom Utilisateur</th><th>Login</th><th>Password</th><th>Modifier</th><th>Supprimer</th></tr>";
-
+            
+                    // Assainir les données avant de les afficher
+                    $loggedInUser = htmlspecialchars($login);
+            
                     // Afficher les données dans un tableau
                     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
-                        // Assainir les données avant de les afficher
                         echo "<td>" . htmlspecialchars($row['nom_utilisateur']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['prenom_utilisateur']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['login']) . "</td>";
                         echo "<td>*****</td>";
                         echo "<td><button onclick='openModifyUserForm({$row['id_utilisateur']})'>Modifier</button></td>";
-                        echo "<td><button  class='delete' onclick='deleteUserConfirmation({$row['id_utilisateur']})'>Supprimer</button></td>";
+            
+                        // Check if the logged-in user is not an admin and the row corresponds to their own account
+                        if ($loggedInUser !== "admin" && $loggedInUser === htmlspecialchars($row['login'])) {
+                            echo "<td>Non autorisé</td>"; // Or you can leave it empty
+                        } else {
+                            echo "<td><button class='delete' onclick='deleteUserConfirmation({$row['id_utilisateur']})'>Supprimer</button></td>";
+                        }
+            
                         echo "</tr>";
                     }
-
+            
                     echo "</table>";
                 } else {
                     echo "<p>Aucun utilisateur trouvé.</p>";

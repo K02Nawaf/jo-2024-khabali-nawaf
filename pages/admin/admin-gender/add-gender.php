@@ -114,7 +114,7 @@ ini_set("display_errors", 1);
             <input type="submit" value="Ajouter le Genre">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-gender.php">Retour à la gestion des genre</a>
+            <a class="link-home" href="manage-gender.php">Retour</a>
         </p>
     </main>
     <footer>

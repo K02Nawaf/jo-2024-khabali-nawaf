@@ -172,7 +172,7 @@ try {
             <input type="submit" value="Modifier le Résultat">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-results.php">Retour à la gestion des Résultats</a>
+            <a class="link-home" href="manage-results.php">Retour</a>
         </p>
     </main>
     <footer>

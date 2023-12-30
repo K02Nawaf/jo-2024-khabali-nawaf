@@ -169,7 +169,7 @@ ini_set("display_errors", 1);
             <input type="submit" value="Ajouter l'Epreuve">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-events.php">Retour à la gestion des Epreuves</a>
+            <a class="link-home" href="manage-events.php">Retour</a>
         </p>
     </main>
     <footer>

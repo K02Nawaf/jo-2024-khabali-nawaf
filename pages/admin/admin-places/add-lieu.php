@@ -133,7 +133,7 @@ ini_set("display_errors", 1);
             <input type="submit" value="Ajouter le Lieu">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-places.php">Retour à la gestion des Lieu</a>
+            <a class="link-home" href="manage-places.php">Retour</a>
         </p>
     </main>
     <footer>

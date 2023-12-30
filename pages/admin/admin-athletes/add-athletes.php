@@ -163,7 +163,7 @@ ini_set("display_errors", 1);
             <input type="submit" value="Ajouter l'Athlete">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-athletes.php">Retour à la gestion des Athletes</a>
+            <a class="link-home" href="manage-athletes.php">Retour</a>
         </p>
     </main>
     <footer>

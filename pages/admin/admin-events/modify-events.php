@@ -207,7 +207,7 @@ try {
             <input type="submit" value="Modifier l'Epreuve">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-events.php">Retour à la gestion des Evenements</a>
+            <a class="link-home" href="manage-events.php">Retour</a>
         </p>
     </main>
     <footer>

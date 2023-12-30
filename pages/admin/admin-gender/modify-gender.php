@@ -148,7 +148,7 @@ try {
             <input type="submit" value="Modifier le Genre">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-gender.php">Retour à la gestion des Genres</a>
+            <a class="link-home" href="manage-gender.php">Retour</a>
         </p>
     </main>
     <footer>

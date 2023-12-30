@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
         <p class="paragraph-link">
-            <a class="link-home" href="manage-results.php">Retour à la gestion des Résultat</a>
+            <a class="link-home" href="manage-results.php">Retour</a>
         </p>
     </main>
     <footer>

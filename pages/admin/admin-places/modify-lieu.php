@@ -167,7 +167,7 @@ try {
             <input type="submit" value="Modifier le Lieu">
         </form>
         <p class="paragraph-link">
-            <a class="link-home" href="manage-places.php">Retour à la gestion des Lieux</a>
+            <a class="link-home" href="manage-places.php">Retour</a>
         </p>
     </main>
     <footer>
