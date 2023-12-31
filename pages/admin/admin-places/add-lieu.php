@@ -79,9 +79,7 @@ ini_set("display_errors", 1);
     <link rel="stylesheet" href="../../../css/styles-responsive.css">
     <link rel="shortcut icon" href="../../../img/favicon-jo-2024.ico" type="image/x-icon">
     <title>Ajouter un Lieu - Jeux Olympiques 2024</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-    </style>
+
 </head>
 
 <body>

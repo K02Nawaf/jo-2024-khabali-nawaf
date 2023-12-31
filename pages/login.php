@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="../css/styles-responsive.css">
     <link rel="shortcut icon" href="../img/favicon-jo-2024.ico" type="image/x-icon">
     <title>Connexion - Jeux Olympiques 2024</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-    </style>
 </head>
 
 <body>
