@@ -13,9 +13,14 @@
 
   /* Affichage des données de l'utilisateur */
   .info-login {
-    margin: 50px auto;
+    margin: 10px auto;
+    margin-top: 0px;
     text-align: center;
-    font-size: 5vw;
+    font-size: 50px;
+    font-family: Syne;
+    background: linear-gradient(to top, #f6f0dd, #d6c278 90%);
+    color: transparent;
+    background-clip: text;
   }
 
   /* Styles pour le menu en version responsive */
@@ -24,44 +29,159 @@
     margin-top: 20px;
   }
 
+
   nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: 20px;
+    box-sizing: border-box;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
   }
 
   nav li {
-    width: 100%; /* Utilisez la largeur totale de l'écran pour chaque élément du menu */
+    width: 100%;
+    /* Largeur fixe pour chaque élément du menu */
+    margin: 0px 20px;
     margin-bottom: 10px;
+    font-family: Lobster;
+    box-shadow: 0px 0px 10px #060606;
+    border-radius: 60px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+
   }
 
   nav a {
     display: block;
     text-decoration: none;
     color: #d7c378;
-    background-color: #1b1b1b; /* Fond du menu */
-    padding: 15px;
+    background-color: #1b1b1b;
+    /* Fond du menu */
+    padding: 10px;
     text-align: center;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Transition pour un effet de survol en douceur */
-    border-radius: 25px;
-    font-size: 25px;
+    transition: all 0.3s ease-out;
+    /* Transition pour un effet de survol en douceur */
+    border-radius: 60px;
+    box-sizing: border-box;
+    border: 2px solid #00000000;
+    cursor: pointer;
   }
 
   nav a:hover {
-    color: #1b1b1b; /* Changement de couleur au survol */
-    background-color: #d7c378; /* Changement de fond au survol */
+    color: #d7c378;
+    background-color: #1b1b1b;
+    border: 2px solid #d7c278a4;
+    cursor: default;
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  nav a:focus {
+    color: #d7c378;
+    background-color: #1b1b1b;
+    border: 2px solid #d7c278a4;
+    cursor: default;
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
+    transition: all 0.2s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* class current used to highlight current page li */
+  .current {
+    color: #1b1b1b;
+    box-shadow: inset 0 0 50px #d7c378;
+    background: #d7c278bc;
+  }
+
+  .current:hover {
+    color: #d7c278b9;
+    background-color: #1b1b1b;
+  }
+
+  li:active {
+    scale: 95%;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .small {
+    width: 100px;
+  }
+
+  /* red stylings for button */
+  .red {
+    background-color: rgb(58, 0, 0);
+    color: #e29898;
+    border: 2px transparent solid;
+  }
+
+  .red:hover {
+    background-color: rgb(45, 0, 0);
+    border: 2px rgb(170, 0, 0) solid;
+    color: rgb(176, 0, 0);
+  }
+
+  .red:focus {
+    background-color: rgb(45, 0, 0);
+    border: 2px rgb(170, 0, 0) solid;
+    color: rgb(176, 0, 0);
+  }
+
+  /* styling for buttons in admin */
+  button {
+    background-color: #fbecb0;
+    border: #b4a466 3px solid;
+    font-family: Syne;
+    font-weight: 300;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #dccb86;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: scale(105%);
+  }
+
+  .action-buttons button {
+    background-color: #ffe791;
+    color: #181818;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Syne;
+    box-shadow: inset 0 0 7px rgba(255, 223, 126, 0.45);
+    border: 3px solid #d7c27800;
+    margin-bottom: 10px;
+  }
+
+  .delete:hover {
+    background-color: #ff4646;
+    border: #9a0000 3px solid;
+    color: rgb(40, 17, 17);
   }
 
   /* Ajuster le conteneur <main> pour les écrans plus petits */
   /* ------------------------------------------------------- */
   main {
     display: flex;
-    flex-direction: column; /* Empiler les éléments verticalement */
-    justify-content: space-around; /* Répartir les éléments de manière égale sur l'axe principal */
+    flex-direction: column;
+    /* Empiler les éléments verticalement */
+    /* justify-content: space-around;  Répartir les éléments de manière égale sur l'axe principal */
     width: 90%;
-    margin: 50px auto; /* Centrer le conteneur sur la page */
+    margin: 0px auto;
+    /* Centrer le conteneur sur la page */
   }
 
   form {
@@ -72,10 +192,36 @@
   /* ------------------------------------------------------------- */
   .category-site {
     display: flex;
-    justify-content: space-around; /* Répartir les éléments de manière égale sur l'axe principal */
+    justify-content: space-around;
+    /* Répartir les éléments de manière égale sur l'axe principal */
     width: 90%;
-    margin: auto; /* Centrer le conteneur sur la page */
+    margin: auto;
+    /* Centrer le conteneur sur la page */
     flex-wrap: wrap;
+  }
+
+  /* Styles for tables */
+  /* ------------------------------------------------------------- */
+  table th {
+    font-size: 20px;
+  }
+
+  table td {
+    font-size: 13px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .table-container {
+    width: 95%;
+  }
+
+  .smallTable th {
+    font-size: 22px;
+  }
+
+  .smallTable td {
+    font-size: 19px;
   }
 
   /* Styles pour les liens donnant l'impression d'être des boutons */
@@ -93,6 +239,7 @@
     font-size: 7vw;
     color: #d7c378;
     padding: 15px;
+    display: none;
   }
 
   /* Lien en bas de page */
@@ -101,14 +248,74 @@
     display: flex;
     justify-content: center;
   }
-  
-/* Propriétés du footer */
-/* -------------------- */
+
+  /* Propriétés du footer */
+  /* -------------------- */
   footer {
     display: flex;
-    margin: 50px auto;
-    width: 90%;
-    height: 40vh;
-    justify-content: center; /* Répartir les éléments de manière égale sur l'axe principal */
+    justify-content: center;
+    align-content: center;
+    /*Aligns content center*/
+    height: 6.5vh;
+    background: linear-gradient(to bottom, #171717, #060606);
+    border-top: #fffcef 3px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0 5vw;
+    background-image: url('../img/Background.png');
+    /* Replace 'your-image.jpg' with the path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    bottom: 0px;
+    animation: moveBackground 15s infinite ease alternate;
   }
+
+  @keyframes moveBackground {
+    0% {
+      background-position-y: top;
+    }
+
+    100% {
+      background-position-y: bottom;
+    }
+  }
+
+  /* Link element styling */
+  footer a {
+    text-decoration: none;
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /*Aligns content center*/
+    margin: 10px 3vw;
+    font-family: LobsterTwo;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff4cd;
+    box-shadow: inset 0 0 7px #413a215c;
+    text-shadow: 0 0 70px rgb(0, 0, 0);
+    /* color: #8c7936; */
+    /* text-shadow: 0 0 7px #ffffff48; */
+    /* box-shadow: inset 0 0 7px #413a2121; */
+    border-radius: 5rem;
+    transition: all 0.3s ease-out;
+    /* border-right: #ffffff24 3px solid; */
+    box-sizing: border-box;
+  }
+
+  footer a:hover {
+    color: #d6c278;
+    box-shadow: inset 0 0 100px #000000, 0 0 2px black;
+    text-shadow: 0 0 70px rgb(188, 188, 188);
+  }
+
+  footer a:focus {
+    color: #d6c278;
+    box-shadow: inset 0 0 100px #000000, 0 0 2px black;
+    text-shadow: 0 0 70px rgb(188, 188, 188);
+    outline: none;
+  }
+
 }

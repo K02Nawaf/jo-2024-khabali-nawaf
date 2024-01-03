@@ -165,7 +165,7 @@ ini_set("display_errors", 1);
         </p>
     </main>
     <footer>
-        <a href="">Plan de Site</a>
+
         <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>
