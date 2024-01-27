@@ -27,7 +27,7 @@
     <main>
         <figure>
             <img class="small" src="../img/cutLogo-jo-2024.png" alt="logo jeux olympiques 2024">
-            <h1>Connexion</h1>
+            <h1>Connexion Admin</h1>
         </figure>
         <form action="../database/auth.php" method="post">
             <label for="login">Login :</label>
@@ -50,7 +50,6 @@
         ?>
     </main>
     <footer>
-
         <a href="https://cdc-jo-nkh.netlify.app/" target="blank">Cahier de charge</a>
         <a href="https://nawafkh.webflow.io/" target="blank">Portfolio</a>
     </footer>

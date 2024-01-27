@@ -1,17 +1,20 @@
 <?php
+ini_set('session.cookie_lifetime', 0);  // Set session cookie to expire when the browser is closed
 session_start(); // Start the PHP session to store session variables.
 
 require_once("database.php"); // Include the database connection file.
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // Check if the request method is POST (form submitted).
-    $login = $_POST["login"]; // Retrieve the value of the "login" field from the form.
+    
+    $loginRetrieve = $_POST["login"]; // Retrieve the value of the "login" field from the form.
+    $login = htmlspecialchars($loginRetrieve); // Sanitize the login input
     $password = $_POST["password"]; // Retrieve the value of the "password" field from the form.
-
+    
     // Prepare the SQL query to retrieve user information with the specified login.
     $query = "SELECT id_utilisateur, nom_utilisateur, prenom_utilisateur, login, password FROM UTILISATEUR WHERE login = :login";
     $stmt = $connexion->prepare($query); // Prepare the query with PDO.
-    $stmt->bindParam(":login", $login, PDO::PARAM_STR); // Bind the :login variable to the value of the login, preventing SQL injections.
-
+    $stmt->bindParam(":login", $login, PDO::PARAM_STR); // Bind the :login variable to the sanitized login, preventing SQL injections.
+    
     if ($stmt->execute()) { // Execute the prepared query.
         $row = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the first result row from the query.
 

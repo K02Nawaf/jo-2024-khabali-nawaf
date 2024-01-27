@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../../../database/database.php");
+require_once"../../../database/database.php";
 
 // Vérifiez si l'utilisateur est connecté
 if (!isset($_SESSION['login'])) {
@@ -40,4 +40,5 @@ if (!isset($_GET['id_genre'])) {
 // Afficher les erreurs en PHP (fonctionne à condition d’avoir activé l’option en local)
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+
 ?>

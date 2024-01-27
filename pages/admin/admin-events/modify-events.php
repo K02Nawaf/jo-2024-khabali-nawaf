@@ -150,7 +150,7 @@ try {
         }
         ?>
         <form action="modify-events.php?id_epreuve=<?php echo $id_epreuve; ?>" method="post"
-            onsubmit="return confirm('Êtes-vous sûr de vouloir modifier ce lieu?')">
+            onsubmit="return confirm('Êtes-vous sûr de vouloir modifier ce epreuve?')">
             <label for=" nomLieu">Nom du Epreuve :</label>
             <input type="text" placeholder="Exemple" name="nomEpreuve" id="nomEpreuve"
                 value="<?php echo htmlspecialchars($Epreuve['nom_epreuve']); ?>" required>

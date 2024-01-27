@@ -106,15 +106,15 @@ $prenom_utilisateur = $_SESSION['nom_utilisateur'];
         }
 
         function openModifyGenderForm(id_genre) {
-            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un sport
+            // Ajoutez ici le code pour afficher un formulaire stylisé pour modifier un Genre
             // alert(id_genre);
             window.location.href = 'modify-gender.php?id_genre=' + id_genre;
         }
 
         function deleteGenderConfirmation(id_genre) {
-            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un sport
-            if (confirm("Êtes-vous sûr de vouloir supprimer ce sport?")) {
-                // Ajoutez ici le code pour la suppression du sport
+            // Ajoutez ici le code pour afficher une fenêtre de confirmation pour supprimer un Genre
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce Genre?")) {
+                // Ajoutez ici le code pour la suppression du Genre
                 // alert(id_genre);
                 window.location.href = 'delete-gender.php?id_genre=' + id_genre;
             }

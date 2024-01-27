@@ -201,6 +201,7 @@ footer a {
   transition: all 0.3s ease-out;
   /* border-right: #ffffff24 3px solid; */
   box-sizing: border-box;
+  max-width: 250px;
 }
 
 footer a:hover {

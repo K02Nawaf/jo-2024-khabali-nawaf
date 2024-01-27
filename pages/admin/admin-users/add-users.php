@@ -35,11 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: add-users.php");
             exit();
         } else {
-            // Hash the password
+            
+            // Hachage du mot de passe
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Requête pour ajouter un utilisateur
-            $query = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, login, password) VALUES (:nomUser, :prenomUser, :login, :hashedPassword)";
+            $query = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, login, password) 
+            VALUES (:nomUser, :prenomUser, :login, :hashedPassword)";
+
             $statement = $connexion->prepare($query);
             $statement->bindParam(":nomUser", $nomUser, PDO::PARAM_STR);
             $statement->bindParam(":prenomUser", $prenomUser, PDO::PARAM_STR);
